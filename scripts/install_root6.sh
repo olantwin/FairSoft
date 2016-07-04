@@ -100,6 +100,11 @@ then
     mypatch ../root6_00_find_xrootd.patch
   fi
 
+  # needed to compile root6 with gcc 6
+  if [ "$build_root6" = "yes" ]; then
+    mypatch ../root6-Replace-0x1p-61-GNU-or-C-1z-with-pow-2-61.patch
+  fi
+
   # add python command history to ROOT.py
   mypatch ../root_pythonhistory.patch
 
