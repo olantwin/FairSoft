@@ -19,8 +19,8 @@ basics/gtest-1.7.0.zip
 basics/gtest-1.7.0/
 basics/libsodium
 basics/zeromq
-basics/zeromq-4.1.3.tar.gz
-basics/zeromq-4.1.3/
+basics/zeromq-4.1.5.tar.gz
+basics/zeromq-4.1.5/
 generators/HepMC
 generators/HepMC-2.06.09.tar.gz
 generators/HepMC-2.06.09/
