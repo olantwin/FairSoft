@@ -1,5 +1,5 @@
---- root/build_for_fair/lib/root/ROOT.py
-+++ root/build_for_fair/lib/root/ROOT.py
+--- lib/root/ROOT.py
++++ lib/root/ROOT.py
 @@ -83,6 +83,12 @@
  
     readline.parse_and_bind( 'tab: complete' )

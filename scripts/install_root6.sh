@@ -105,9 +105,6 @@ then
     mypatch ../root6-Replace-0x1p-61-GNU-or-C-1z-with-pow-2-61.patch
   fi
 
-  # add python command history to ROOT.py
-  mypatch ../root_pythonhistory.patch
-
   if [ "$build_root6" = "no" ]; then
     mypatch ../root5_34_find_xrootd.patch
   fi
@@ -116,6 +113,10 @@ then
 
   $MAKE_command -j$number_of_processes
   echo "make finished" 
+
+  # add python command history to ROOT.py
+  mypatch ../../root_pythonhistory.patch
+
   cd $SIMPATH/tools/root/etc/vmc
 
   if [ "$arch" = "linuxx8664icc" ];
@@ -170,8 +171,6 @@ then
      echo "libVc.a not found in lib dirctory "
    fi
    #####################################
-
-
 
   export PATH=${install_prefix}/bin:${PATH}
 
