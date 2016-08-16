@@ -98,6 +98,8 @@ then
   if [ "$build_root6" = "yes" ]; then
     mypatch ../root6_xrootd.patch
     mypatch ../root6_00_find_xrootd.patch
+    mypatch ../root-no-abi-check.patch
+    mypatch ../root-abitags.patch
   fi
 
   # needed to compile root6 with gcc 6

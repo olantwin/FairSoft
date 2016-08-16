@@ -40,6 +40,7 @@ then
 
   if [ "$platform" = "linux" -a "$compiler" = "Clang" ]; then
     mypatch ../geant4.10.00_clang_linux.patch
+    mypatch ../geant4.10.00.p02_root6.patch
   fi
 
   if [ "$platform" = "macosx" ]; then

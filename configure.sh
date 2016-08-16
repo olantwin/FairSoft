@@ -67,7 +67,7 @@ version=$(lsb_release -rs | cut -f1 -d.)
 
 if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
  # operating system of last century, need newer gcc / python
-  eval `/afs/cern.ch/sw/lcg/releases/lcgenv/latest/lcgenv -p /afs/cern.ch/sw/lcg/releases/LCG_82 x86_64-slc6-gcc49-opt Python`
+  eval "$(/afs/cern.ch/sw/lcg/releases/lcgenv/latest/lcgenv -p /afs/cern.ch/sw/lcg/releases/LCG_85 x86_64-slc6-gcc49-opt Python)"
 fi
 
 # Set the cache file name

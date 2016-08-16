@@ -41,13 +41,13 @@ if [ "$build_root6" = "yes" ]; then
   # Root v6.04.06
   # export ROOTVERSION=v6-04-06
   # version with bug fix for Ubuntu
-  export ROOTVERSION=423b31a13ab71091b4e9775b17c864508ea29a81
+  export ROOTVERSION=v6-06-06
 else
   # Root v5.34.32
   export ROOTVERSION=v5-34-34
 fi
 
-export XROOTDVERSION=4.3.0
+export XROOTDVERSION=4.4.0
 
 export PLUTO_LOCATION="http://web-docs.gsi.de/%7Ehadeshyp/pluto/v5.37/"
 export PLUTOVERSION=pluto_v5.37
@@ -137,6 +137,6 @@ export TAUOLA_LOCATION="http://tauolapp.web.cern.ch/tauolapp/resources/"
 export TAUOLA_VERSION="1.1.5"
 
 export EVTGEN_LOCATION="http://svn.cern.ch/guest/evtgen/tags/"
-export EVTGEN_VERSION="R01-05-00"
+export EVTGEN_VERSION="R01-06-00"
 
 
