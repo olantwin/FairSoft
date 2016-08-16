@@ -303,7 +303,7 @@ fi
 
 if [ "$check" = "1" ];
 then
-  source scripts/install_root6.sh
+  source scripts/install_root.sh
 fi
 
 ##################### G4Py #############################################

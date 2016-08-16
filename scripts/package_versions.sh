@@ -38,9 +38,7 @@ export GEANT4VERSIONp=Geant4-10.1.2
 
 export ROOT_LOCATION="http://root.cern.ch/git/root.git"
 if [ "$build_root6" = "yes" ]; then
-  # Root v6.04.06
-  # export ROOTVERSION=v6-04-06
-  # version with bug fix for Ubuntu
+  # Root v6.06.06
   export ROOTVERSION=v6-06-06
 else
   # Root v5.34.32
