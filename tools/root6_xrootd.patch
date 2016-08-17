@@ -9,8 +9,8 @@
  #include <XrdCl/XrdClFile.hh>
  #include <XrdCl/XrdClXRootDResponses.hh>
 
---- ../../gcc49/FairSoft/tools/root/net/netxng/src/TNetXNGFile.cxx	2016-08-11 15:09:30.851672875 +0200
-+++ tools/root/net/netxng/src/TNetXNGFile.cxx	2016-08-16 07:43:22.837011676 +0200
+--- net/netxng/src/TNetXNGFile.cxx	2016-08-11 15:09:30.851672875 +0200
++++ net/netxng/src/TNetXNGFile.cxx	2016-08-16 07:43:22.837011676 +0200
 @@ -216,6 +216,7 @@
  {
     if (IsOpen())

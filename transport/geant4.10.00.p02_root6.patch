@@ -1,5 +1,5 @@
---- ../../gcc49/FairSoft/transport/geant4/source/processes/hadronic/models/neutron_hp/src/G4NeutronHPCapture.cc	2014-11-06 09:35:05.000000000 +0100
-+++ transport/geant4/source/processes/hadronic/models/neutron_hp/src/G4NeutronHPCapture.cc	2016-08-16 07:45:33.305847662 +0200
+--- source/processes/hadronic/models/neutron_hp/src/G4NeutronHPCapture.cc	2014-11-06 09:35:05.000000000 +0100
++++ source/processes/hadronic/models/neutron_hp/src/G4NeutronHPCapture.cc	2016-08-16 07:45:33.305847662 +0200
 @@ -78,6 +78,8 @@
    
    G4NeutronHPCapture::~G4NeutronHPCapture()
@@ -11,7 +11,8 @@
       for ( std::vector<G4NeutronHPChannel*>::iterator 
 
 000000 +0100
-+++ transport/geant4/source/processes/hadronic/models/neutron_hp/src/G4NeutronHPFission.cc	2016-08-16 07:44:22.065415297 +0200
+--- source/processes/hadronic/models/neutron_hp/src/G4NeutronHPFission.cc	
++++ source/processes/hadronic/models/neutron_hp/src/G4NeutronHPFission.cc	2016-08-16 07:44:22.065415297 +0200
 @@ -75,6 +75,8 @@
    
    G4NeutronHPFission::~G4NeutronHPFission()
@@ -22,8 +23,8 @@
       for ( std::vector<G4NeutronHPChannel*>::iterator 
             it = (*theFission).begin() ; it != (*theFission).end() ; it++ )
 
---- ../../gcc49/FairSoft/transport/geant4/source/processes/hadronic/models/neutron_hp/src/G4NeutronHPInelastic.cc	2014-11-06 09:35:05.000000000 +0100
-+++ transport/geant4/source/processes/hadronic/models/neutron_hp/src/G4NeutronHPInelastic.cc	2016-08-16 07:45:09.225707567 +0200
+--- source/processes/hadronic/models/neutron_hp/src/G4NeutronHPInelastic.cc	2014-11-06 09:35:05.000000000 +0100
++++ source/processes/hadronic/models/neutron_hp/src/G4NeutronHPInelastic.cc	2016-08-16 07:45:09.225707567 +0200
 @@ -200,6 +200,7 @@
  
    G4NeutronHPInelastic::~G4NeutronHPInelastic()
