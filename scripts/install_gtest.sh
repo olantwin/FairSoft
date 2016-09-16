@@ -10,9 +10,9 @@ then
     download_file $GTEST_LOCATION/$GTESTVERSION.zip
   fi
   untar gtest $GTESTVERSION.zip
-  if [ -d  $GTESTVERSION ];
+  if [ -d  googletest-$GTESTVERSION ];
   then
-    ln -s $GTESTVERSION gtest
+    ln -s googletest-$GTESTVERSION gtest
   fi
 fi
 
