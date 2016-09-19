@@ -5,7 +5,7 @@ export CMAKEVERSION_REQUIRED=cmake-3.1.0
 export CMAKEVERSION=cmake-3.3.2
 
 export GTEST_LOCATION="https://github.com/google/googletest/archive/"
-export GTESTVERSION=release-1.7.0
+export GTESTVERSION=release-1.8.0
 
 export GSL_LOCATION="ftp://ftp.gnu.org/gnu/gsl/"
 export GSLVERSION=gsl-1.16

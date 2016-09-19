@@ -27,14 +27,15 @@ then
     cd gtest
     mkdir build
     cd build
-    cmake .. -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_COMPILER=$CC
+    cmake .. -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_COMPILER=$CC -DBUILD_GMOCK=OFF -DBUILD_GTEST=ON
     make
     # fake the installation process
     mkdir -p $install_prefix/lib
+    cd googletest
     cp libgtest.a libgtest_main.a $install_prefix/lib
     if [ ! -d $install_prefix/include/gtest ];then
       mkdir -p $install_prefix/include
-      cp -r ../include/gtest $install_prefix/include
+      cp -r ../../googletest/include/gtest $install_prefix/include
     fi
 
     check_all_libraries  $install_prefix/lib
