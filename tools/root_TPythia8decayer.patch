@@ -1,0 +1,30 @@
+--- montecarlo/pythia8/src/TPythia8Decayer.cxx
++++ montecarlo/pythia8/src/TPythia8Decayer.cxx
+@@ -26,7 +26,7 @@ ClassImp(TPythia8Decayer)
+ ///constructor
+ 
+ TPythia8Decayer::TPythia8Decayer():
+-  fPythia8(new TPythia8()),
++  fPythia8(TPythia8::Instance()),
+   fDebug(0)
+ {
+    fPythia8->Pythia8()->readString("SoftQCD:elastic = on");
+@@ -38,6 +38,7 @@ TPythia8Decayer::TPythia8Decayer():
+ 
+ void TPythia8Decayer::Init()
+ {
++fPythia8->Pythia8()->init();
+ }
+ 
+ ////////////////////////////////////////////////////////////////////////////////
+@@ -47,8 +48,8 @@ void TPythia8Decayer::Decay(Int_t pdg, TLorentzVector* p)
+ {
+    ClearEvent();
+    AppendParticle(pdg, p);
+-   Int_t idPart = fPythia8->Pythia8()->event[0].id();
+-   fPythia8->Pythia8()->particleData.mayDecay(idPart,kTRUE);
++   // Int_t idPart = fPythia8->Pythia8()->event[0].id();
++   // do not overwrite the user settings: fPythia8->Pythia8()->particleData.mayDecay(idPart,kTRUE);
+    fPythia8->Pythia8()->moreDecays();
+    if (fDebug > 0) fPythia8->EventListing();
+ }

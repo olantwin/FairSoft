@@ -1,0 +1,39 @@
+--- source/physics/src/TG4ExtDecayer.cxx
++++ source/physics/src/TG4ExtDecayer.cxx
+@@ -36,7 +36,7 @@ TG4ExtDecayer::TG4ExtDecayer(TVirtualMCDecayer* externalDecayer)
+     TG4Verbose("extDecayer"),
+     fParticlesManager(TG4ParticlesManager::Instance()),
+     fExternalDecayer(externalDecayer),
+-    fDecayProductsArray(0)
++    fDecayProductsArray(0),fWithNeutrinos(true)
+ {
+ /// Standard constructor
+ 
+@@ -108,7 +108,7 @@ G4DecayProducts* TG4ExtDecayer::ImportDecayProducts(const G4Track& track)
+     G4int status = particle->GetStatusCode();
+     G4int pdg = particle->GetPdgCode();
+     if ( status>0 && status<11 && 
+-         abs(pdg)!=12 && abs(pdg)!=14 && abs(pdg)!=16 ) {
++        ( (abs(pdg)!=12 && abs(pdg)!=14 && abs(pdg)!=16) || fWithNeutrinos) ) {
+       // pass to tracking final particles only;
+       // skip neutrinos
+
+--- source/physics/include/TG4ExtDecayer.h
++++ source/physics/include/TG4ExtDecayer.h
+@@ -46,6 +46,7 @@ class TG4ExtDecayer : public G4VExtDecayer,
+     virtual ~TG4ExtDecayer();
+ 
+     virtual G4DecayProducts* ImportDecayProducts(const G4Track& track);
++    virtual void    withNeutrinos() {fWithNeutrinos = true;}
+     
+   private:
+     /// Not implemented
+@@ -56,6 +57,7 @@ class TG4ExtDecayer : public G4VExtDecayer,
+     TG4ParticlesManager* fParticlesManager;  ///< particles manager 
+     TVirtualMCDecayer*   fExternalDecayer;   ///< the external decayer
+     TClonesArray*        fDecayProductsArray;///< array of decay products
++    bool    fWithNeutrinos; ///< follow also neutrinos 
+ };
+ 
+ #endif //TG4_EXT_DECAYER_H
+

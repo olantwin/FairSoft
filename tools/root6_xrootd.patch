@@ -8,3 +8,14 @@
  #include <XrdCl/XrdClURL.hh>
  #include <XrdCl/XrdClFile.hh>
  #include <XrdCl/XrdClXRootDResponses.hh>
+
+--- net/netxng/src/TNetXNGFile.cxx	2016-08-11 15:09:30.851672875 +0200
++++ net/netxng/src/TNetXNGFile.cxx	2016-08-16 07:43:22.837011676 +0200
+@@ -216,6 +216,7 @@
+ {
+    if (IsOpen())
+       Close();
++   if (!fFile || fFile){return;} //TR: brute force fix to avoid segfault at python exit
+    delete fFile;
+    delete fUrl;
+    delete fInitCondVar;

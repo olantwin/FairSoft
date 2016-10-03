@@ -1,0 +1,36 @@
+--- source/processes/hadronic/models/neutron_hp/src/G4NeutronHPCapture.cc	2014-11-06 09:35:05.000000000 +0100
++++ source/processes/hadronic/models/neutron_hp/src/G4NeutronHPCapture.cc	2016-08-16 07:45:33.305847662 +0200
+@@ -78,6 +78,8 @@
+   
+   G4NeutronHPCapture::~G4NeutronHPCapture()
+   {
++        if (!theCapture){ return;}
++
+     //delete [] theCapture;
+ //    G4cout << "Leaving G4NeutronHPCapture::~G4NeutronHPCapture"<<G4endl;
+      for ( std::vector<G4NeutronHPChannel*>::iterator 
+
+000000 +0100
+--- source/processes/hadronic/models/neutron_hp/src/G4NeutronHPFission.cc	
++++ source/processes/hadronic/models/neutron_hp/src/G4NeutronHPFission.cc	2016-08-16 07:44:22.065415297 +0200
+@@ -75,6 +75,8 @@
+   
+   G4NeutronHPFission::~G4NeutronHPFission()
+   {
++        if (!theFission){ return;}
++
+     //delete [] theFission;
+      for ( std::vector<G4NeutronHPChannel*>::iterator 
+            it = (*theFission).begin() ; it != (*theFission).end() ; it++ )
+
+--- source/processes/hadronic/models/neutron_hp/src/G4NeutronHPInelastic.cc	2014-11-06 09:35:05.000000000 +0100
++++ source/processes/hadronic/models/neutron_hp/src/G4NeutronHPInelastic.cc	2016-08-16 07:45:09.225707567 +0200
+@@ -200,6 +200,7 @@
+ 
+   G4NeutronHPInelastic::~G4NeutronHPInelastic()
+   {
++        if (!theInelastic){  return;}
+ //    delete [] theInelastic;
+      for ( std::vector<G4NeutronHPChannelList*>::iterator 
+            it = (*theInelastic).begin() ; it != (*theInelastic).end() ; it++ )
+

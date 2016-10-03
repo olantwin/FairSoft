@@ -4,8 +4,8 @@ export CMAKE_LOCATION="http://www.cmake.org/files/v3.3/"
 export CMAKEVERSION_REQUIRED=cmake-3.1.0
 export CMAKEVERSION=cmake-3.3.2
 
-export GTEST_LOCATION="http://googletest.googlecode.com/files/"
-export GTESTVERSION=gtest-1.7.0
+export GTEST_LOCATION="https://github.com/google/googletest/archive/"
+export GTESTVERSION=release-1.8.0
 
 export GSL_LOCATION="ftp://ftp.gnu.org/gnu/gsl/"
 export GSLVERSION=gsl-1.16
@@ -16,8 +16,6 @@ export ICUVERSION=icu4c-53_1
 export BOOST_LOCATION="http://sourceforge.net/projects/boost/files/boost/1.59.0/"
 export BOOSTVERSION=boost_1_59_0
 
-#export PYTHIA6_LOCATION="ftp://root.cern.ch/root/"
-#export PYTHIA6VERSION=pythia6
 export PYTHIA6_LOCATION="http://www.hepforge.org/archive/pythia6"
 export PYTHIA6VERSION=pythia-6.4.28
 
@@ -27,8 +25,9 @@ export HEPMCVERSION=2.06.09
 export PYTHIA8_LOCATION="http://home.thep.lu.se/~torbjorn/pythia8/"
 export PYTHIA8VERSION=pythia8212
 
+# Old versions available at: https://archive.apache.org/dist/xerces/c/3/sources/
 export XERCESC_LOCATION="http://mirror.serversupportforum.de/apache/xerces/c/3/sources/"
-export XERCESCVERSION=3.1.2
+export XERCESCVERSION=3.1.4
 
 export MESA_LOCATION="ftp://ftp.freedesktop.org/pub/mesa/older-versions/7.x/7.10.3/"
 export MESAVERSION=MesaLib-7.10.3
@@ -39,16 +38,14 @@ export GEANT4VERSIONp=Geant4-10.1.2
 
 export ROOT_LOCATION="http://root.cern.ch/git/root.git"
 if [ "$build_root6" = "yes" ]; then
-  # Root v6.04.06
-  # export ROOTVERSION=v6-04-06
-  # version with bug fix for Ubuntu
-  export ROOTVERSION=423b31a13ab71091b4e9775b17c864508ea29a81
+  # Root v6.06.08
+  export ROOTVERSION=v6-06-08
 else
   # Root v5.34.32
   export ROOTVERSION=v5-34-34
 fi
 
-export XROOTDVERSION=4.1.1
+export XROOTDVERSION=4.4.0
 
 export PLUTO_LOCATION="http://web-docs.gsi.de/%7Ehadeshyp/pluto/v5.37/"
 export PLUTOVERSION=pluto_v5.37
@@ -69,9 +66,9 @@ export MILLEPEDE_VERSION=V04-03-01
 export SODIUM_LOCATION="https://github.com/jedisct1/libsodium"
 export SODIUMBRANCH=1.0.3
 
-export ZEROMQ_LOCATION="http://download.zeromq.org/"
-export ZEROMQVERSION=4.1.3
-export ZEROMQDIR=4.1.3
+export ZEROMQ_LOCATION="https://github.com/zeromq/zeromq4-1/releases/download/"
+export ZEROMQVERSION=4.1.5
+export ZEROMQDIR=4.1.5
 
 export PROTOBUF_LOCATION="https://github.com/google/protobuf/releases/download/v2.6.1"
 export PROTOBUF_VERSION=protobuf-2.6.1
@@ -138,6 +135,6 @@ export TAUOLA_LOCATION="http://tauolapp.web.cern.ch/tauolapp/resources/"
 export TAUOLA_VERSION="1.1.5"
 
 export EVTGEN_LOCATION="http://svn.cern.ch/guest/evtgen/tags/"
-export EVTGEN_VERSION="R01-05-00"
+export EVTGEN_VERSION="R01-06-00"
 
 

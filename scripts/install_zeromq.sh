@@ -6,7 +6,7 @@ then
   if [ ! -e zeromq-$ZEROMQVERSION.tar.gz ];
   then
     echo "*** Downloading zeromq sources ***"
-    download_file $ZEROMQ_LOCATION/zeromq-$ZEROMQVERSION.tar.gz
+    download_file $ZEROMQ_LOCATION/v$ZEROMQVERSION/zeromq-$ZEROMQVERSION.tar.gz
   fi
   untar zeromq zeromq-$ZEROMQVERSION.tar.gz
   if [ -d zeromq-$ZEROMQDIR ];

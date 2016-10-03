@@ -6,7 +6,7 @@ then
   if [ ! -e pythia6.tar.gz ];
   then
     echo "*** Downloading pythia6 sources ***"
-    download_file ftp://root.cern.ch/root/pythia6.tar.gz
+    download_file https://root.cern.ch/download/pythia6.tar.gz
     echo "*** Downloading $PYTHIA6_LOCATION/$PYTHIA6VERSION.f.gz ***"
     download_file $PYTHIA6_LOCATION/$PYTHIA6VERSION.f.gz
   fi
