@@ -84,6 +84,9 @@ then
     mysed 'LDFLAGS       = $(OPT) -m64 -mmacosx-version-min=$(MACOSXVERS)' 'LDFLAGS       = -m64 -mmacosx-version-min=$(MACOSXVERS)' config/Makefile.macosx64
   fi
 
+  # needed to solve problem with double TPythia8 instance
+  mypatch ../root_TPythia8decayer.patch
+
   # needed to solve problem with the TGeoManger for some CBM and Panda geometries
   mypatch ../root_TGeoShape.patch
 
