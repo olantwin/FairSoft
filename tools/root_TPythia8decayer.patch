@@ -17,14 +17,15 @@
  }
  
  ////////////////////////////////////////////////////////////////////////////////
-@@ -47,8 +48,8 @@ void TPythia8Decayer::Decay(Int_t pdg, TLorentzVector* p)
- {
-    ClearEvent();
-    AppendParticle(pdg, p);
--   Int_t idPart = fPythia8->Pythia8()->event[0].id();
--   fPythia8->Pythia8()->particleData.mayDecay(idPart,kTRUE);
-+   // Int_t idPart = fPythia8->Pythia8()->event[0].id();
-+   // do not overwrite the user settings: fPythia8->Pythia8()->particleData.mayDecay(idPart,kTRUE);
+@@ -51,6 +52,7 @@ void TPythia8Decayer::Decay(Int_t pdg, TLorentzVector* p)
+    fPythia8->Pythia8()->particleData.mayDecay(idPart,kTRUE);
     fPythia8->Pythia8()->moreDecays();
     if (fDebug > 0) fPythia8->EventListing();
++   fPythia8->Pythia8()->particleData.mayDecay(idPart,kFALSE);
+ }
+ 
+ ////////////////////////////////////////////////////////////////////////////////
+@@ -113,4 +115,3 @@ void TPythia8Decayer::ClearEvent()
+ {
+    fPythia8->Pythia8()->event.clear();
  }
