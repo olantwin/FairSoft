@@ -99,17 +99,6 @@ then
     # needed to compile root6 with newer versions of xrootd:
     mypatch ../root6_xrootd.patch
     mypatch ../root6_00_find_xrootd.patch
-    # patches from Fedora, hopefully obsoleted in future by root6.08;
-    # needed to compile root6 with gcc 6:
-    if [ "$compiler" = "gcc" ];
-    then
-      GCC_MAJOR=$(gcc -dumpversion | cut -c 1)
-      if [ "$GCC_MAJOR" -gt 4  ];
-      then
-        mypatch ../root-no-abi-check.patch
-        mypatch ../root-abitags.patch
-      fi
-    fi
   fi
 
   if [ "$build_root6" = "no" ]; then
