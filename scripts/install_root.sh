@@ -94,6 +94,8 @@ then
   mypatch ../root5_34_19_hlt.patch
 
   if [ "$build_root6" = "yes" ]; then
+    # adding ortho camera zx
+    mypatch ../root6_orthoZOX.patch
     # needed to compile root6 with newer versions of xrootd:
     mypatch ../root6_xrootd.patch
     mypatch ../root6_00_find_xrootd.patch
