@@ -174,7 +174,7 @@
 +      case kZnOX:
 +      {
 +         // Z -> X, X -> Y, Y -> Z
-+         fDefYSize = e.Z(); fDefXSize = e.X();
++         fDefXSize = e.Z(); fDefYSize = e.X();
 +         break;
 +      }
     }
