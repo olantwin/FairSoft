@@ -1,0 +1,203 @@
+--- graf3d/gl/inc/TGLViewer.h
++++ graf3d/gl/inc/TGLViewer.h
+@@ -61,8 +61,8 @@ class TGLViewer : public TVirtualViewer3D,
+ public:
+ 
+    enum ECameraType { kCameraPerspXOZ,  kCameraPerspYOZ,  kCameraPerspXOY,
+-                      kCameraOrthoXOY,  kCameraOrthoXOZ,  kCameraOrthoZOY,
+-                      kCameraOrthoXnOY, kCameraOrthoXnOZ, kCameraOrthoZnOY };
++                      kCameraOrthoXOY,  kCameraOrthoXOZ,  kCameraOrthoZOY, kCameraOrthoZOX,
++                      kCameraOrthoXnOY, kCameraOrthoXnOZ, kCameraOrthoZnOY, kCameraOrthoZnOX };
+ 
+    enum ESecSelType { // When to do secondary-selection:
+       kOnRequest,     // - on request - when Mod1 is pressed or logical-shape requests it;
+@@ -90,9 +90,11 @@ protected:
+    TGLOrthoCamera       fOrthoXOYCamera;       //!
+    TGLOrthoCamera       fOrthoXOZCamera;       //!
+    TGLOrthoCamera       fOrthoZOYCamera;       //!
++   TGLOrthoCamera       fOrthoZOXCamera;       //!
+    TGLOrthoCamera       fOrthoXnOYCamera;      //!
+    TGLOrthoCamera       fOrthoXnOZCamera;      //!
+    TGLOrthoCamera       fOrthoZnOYCamera;      //!
++   TGLOrthoCamera       fOrthoZnOXCamera;      //!
+    TGLCamera           *fCurrentCamera;        //!
+    TGLAutoRotator      *fAutoRotator;          //!
+ 
+--- graf3d/gl/src/TGLSAViewer.cxx
++++ graf3d/gl/src/TGLSAViewer.cxx
+@@ -119,11 +119,12 @@ CAMERA\n\
+ \n\
+    In each case the floor plane (defined by two axes) is kept level.\n\
+ \n\
+-   There are also three orthographic cameras:\n\
++   There are also four orthographic cameras:\n\
+ \n\
+    \tOrthographic (XOY)\n\
+    \tOrthographic (XOZ)\n\
+    \tOrthographic (ZOY)\n\
++   \tOrthographic (ZOX)\n\
+ \n\
+    In each case the first axis is placed horizontal, the second vertical e.g.\n\
+    XOY means X horizontal, Y vertical.\n\n";
+@@ -401,9 +402,11 @@ void TGLSAViewer::CreateMenus()
+    fCameraMenu->AddEntry("Orthographic (XOY)", kGLXOY);
+    fCameraMenu->AddEntry("Orthographic (XOZ)", kGLXOZ);
+    fCameraMenu->AddEntry("Orthographic (ZOY)", kGLZOY);
++   fCameraMenu->AddEntry("Orthographic (ZOX)", kGLZOX);
+    fCameraMenu->AddEntry("Orthographic (XnOY)", kGLXnOY);
+    fCameraMenu->AddEntry("Orthographic (XnOZ)", kGLXnOZ);
+    fCameraMenu->AddEntry("Orthographic (ZnOY)", kGLZnOY);
++   fCameraMenu->AddEntry("Orthographic (ZnOX)", kGLZnOX);
+    fCameraMenu->AddSeparator();
+    fCameraMenu->AddEntry("Ortho allow rotate", kGLOrthoRotate);
+    fCameraMenu->AddEntry("Ortho allow dolly",  kGLOrthoDolly);
+@@ -716,6 +719,9 @@ Bool_t TGLSAViewer::ProcessFrameMessage(Long_t msg, Long_t parm1, Long_t)
+          case kGLZOY:
+             SetCurrentCamera(TGLViewer::kCameraOrthoZOY);
+             break;
++         case kGLZOX:
++            SetCurrentCamera(TGLViewer::kCameraOrthoZOX);
++            break;
+          case kGLXnOY:
+             SetCurrentCamera(TGLViewer::kCameraOrthoXnOY);
+             break;
+@@ -725,6 +731,9 @@ Bool_t TGLSAViewer::ProcessFrameMessage(Long_t msg, Long_t parm1, Long_t)
+          case kGLZnOY:
+             SetCurrentCamera(TGLViewer::kCameraOrthoZnOY);
+             break;
++         case kGLZnOX:
++            SetCurrentCamera(TGLViewer::kCameraOrthoZnOX);
++            break;
+          case kGLOrthoRotate:
+             ToggleOrthoRotate();
+             break;
+--- graf3d/gl/inc/TGLSAViewer.h
++++ graf3d/gl/inc/TGLSAViewer.h
+@@ -40,8 +40,8 @@ public:
+    enum EGLSACommands {
+       kGLHelpAbout, kGLHelpViewer,
+       kGLPerspYOZ, kGLPerspXOZ, kGLPerspXOY,
+-      kGLXOY,  kGLXOZ,  kGLZOY,
+-      kGLXnOY, kGLXnOZ, kGLZnOY,
++      kGLXOY,  kGLXOZ,  kGLZOY,  kGLZOX,
++      kGLXnOY, kGLXnOZ, kGLZnOY, kGLZnOX,
+       kGLOrthoRotate, kGLOrthoDolly,
+       kGLSaveEPS, kGLSavePDF, kGLSavePNG, kGLSaveGIF, kGLSaveAnimGIF,
+       kGLSaveJPG, kGLSaveAS, kGLCloseViewer, kGLQuitROOT,
+--- graf3d/gl/src/TGLViewer.cxx
++++ graf3d/gl/src/TGLViewer.cxx
+@@ -107,9 +107,11 @@ TGLViewer::TGLViewer(TVirtualPad * pad, Int_t x, Int_t y,
+    fOrthoXOYCamera (TGLOrthoCamera::kXOY,  TGLVector3( 0.0, 0.0, 1.0), TGLVector3(0.0, 1.0, 0.0)), // Looking down  Z axis,  X horz, Y vert
+    fOrthoXOZCamera (TGLOrthoCamera::kXOZ,  TGLVector3( 0.0,-1.0, 0.0), TGLVector3(0.0, 0.0, 1.0)), // Looking along Y axis,  X horz, Z vert
+    fOrthoZOYCamera (TGLOrthoCamera::kZOY,  TGLVector3(-1.0, 0.0, 0.0), TGLVector3(0.0, 1.0, 0.0)), // Looking along X axis,  Z horz, Y vert
++   fOrthoZOXCamera (TGLOrthoCamera::kZOX,  TGLVector3( 0.0,-1.0, 0.0), TGLVector3(1.0, 0.0, 0.0)), // Looking along Y axis,  Z horz, X vert
+    fOrthoXnOYCamera(TGLOrthoCamera::kXnOY, TGLVector3( 0.0, 0.0,-1.0), TGLVector3(0.0, 1.0, 0.0)), // Looking along Z axis, -X horz, Y vert
+    fOrthoXnOZCamera(TGLOrthoCamera::kXnOZ, TGLVector3( 0.0, 1.0, 0.0), TGLVector3(0.0, 0.0, 1.0)), // Looking down  Y axis, -X horz, Z vert
+    fOrthoZnOYCamera(TGLOrthoCamera::kZnOY, TGLVector3( 1.0, 0.0, 0.0), TGLVector3(0.0, 1.0, 0.0)), // Looking down  X axis, -Z horz, Y vert
++   fOrthoZnOXCamera(TGLOrthoCamera::kZnOX, TGLVector3( 0.0, 1.0, 0.0), TGLVector3(1.0, 0.0, 0.0)), // Looking down  Y axis, -Z horz, X vert
+    fCurrentCamera(&fPerspectiveCameraXOZ),
+    fAutoRotator(0),
+ 
+@@ -171,9 +173,11 @@ TGLViewer::TGLViewer(TVirtualPad * pad) :
+    fOrthoXOYCamera (TGLOrthoCamera::kXOY,  TGLVector3( 0.0, 0.0, 1.0), TGLVector3(0.0, 1.0, 0.0)), // Looking down  Z axis,  X horz, Y vert
+    fOrthoXOZCamera (TGLOrthoCamera::kXOZ,  TGLVector3( 0.0,-1.0, 0.0), TGLVector3(0.0, 0.0, 1.0)), // Looking along Y axis,  X horz, Z vert
+    fOrthoZOYCamera (TGLOrthoCamera::kZOY,  TGLVector3(-1.0, 0.0, 0.0), TGLVector3(0.0, 1.0, 0.0)), // Looking along X axis,  Z horz, Y vert
++   fOrthoZOXCamera (TGLOrthoCamera::kZOX,  TGLVector3( 0.0,-1.0, 0.0), TGLVector3(1.0, 0.0, 0.0)), // Looking along Y axis,  Z horz, X vert
+    fOrthoXnOYCamera(TGLOrthoCamera::kXnOY, TGLVector3( 0.0, 0.0,-1.0), TGLVector3(0.0, 1.0, 0.0)), // Looking along Z axis, -X horz, Y vert
+    fOrthoXnOZCamera(TGLOrthoCamera::kXnOZ, TGLVector3( 0.0, 1.0, 0.0), TGLVector3(0.0, 0.0, 1.0)), // Looking down  Y axis, -X horz, Z vert
+    fOrthoZnOYCamera(TGLOrthoCamera::kZnOY, TGLVector3( 1.0, 0.0, 0.0), TGLVector3(0.0, 1.0, 0.0)), // Looking down  X axis, -Z horz, Y vert
++   fOrthoZnOXCamera(TGLOrthoCamera::kZnOX, TGLVector3( 0.0, 1.0, 0.0), TGLVector3(1.0, 0.0, 0.0)), // Looking down  Y axis, -Z horz, X vert
+    fCurrentCamera(&fPerspectiveCameraXOZ),
+    fAutoRotator(0),
+ 
+@@ -1757,6 +1761,8 @@ TGLCamera& TGLViewer::RefCamera(ECameraType cameraType)
+       case kCameraOrthoXOZ:
+          return fOrthoXOZCamera;
+       case kCameraOrthoZOY:
++         return fOrthoZOXCamera;
++      case kCameraOrthoZOX:
+          return fOrthoZOYCamera;
+       case kCameraOrthoXnOY:
+          return fOrthoXnOYCamera;
+@@ -1764,6 +1770,8 @@ TGLCamera& TGLViewer::RefCamera(ECameraType cameraType)
+          return fOrthoXnOZCamera;
+       case kCameraOrthoZnOY:
+          return fOrthoZnOYCamera;
++      case kCameraOrthoZnOX:
++         return fOrthoZnOXCamera;
+       default:
+          Error("TGLViewer::SetCurrentCamera", "invalid camera type");
+          return *fCurrentCamera;
+@@ -1811,6 +1819,10 @@ void TGLViewer::SetCurrentCamera(ECameraType cameraType)
+          fCurrentCamera = &fOrthoZOYCamera;
+          break;
+       }
++      case kCameraOrthoZOX: {
++         fCurrentCamera = &fOrthoZOXCamera;
++         break;
++      }
+       case kCameraOrthoXnOY: {
+          fCurrentCamera = &fOrthoXnOYCamera;
+          break;
+@@ -1823,6 +1835,10 @@ void TGLViewer::SetCurrentCamera(ECameraType cameraType)
+          fCurrentCamera = &fOrthoZnOYCamera;
+          break;
+       }
++      case kCameraOrthoZnOX: {
++         fCurrentCamera = &fOrthoZnOXCamera;
++         break;
++      }
+       default: {
+          Error("TGLViewer::SetCurrentCamera", "invalid camera type");
+          break;
+@@ -1896,6 +1912,13 @@ void TGLViewer::SetOrthoCamera(ECameraType camera,
+          }
+          break;
+       }
++      case kCameraOrthoZOX: {
++         fOrthoZOXCamera.Configure(zoom, dolly, center, hRotate, vRotate);
++         if (fCurrentCamera == &fOrthoZOXCamera) {
++            RequestDraw(TGLRnrCtx::kLODHigh);
++         }
++         break;
++      }
+       default: {
+          Error("TGLViewer::SetOrthoCamera", "invalid camera type");
+          break;
+--- graf3d/gl/src/TGLOrthoCamera.cxx
++++ graf3d/gl/src/TGLOrthoCamera.cxx
+@@ -121,6 +121,13 @@ void TGLOrthoCamera::Reset()
+          fDefXSize = e.Z(); fDefYSize = e.Y();
+          break;
+       }
++      case kZOX:
++      case kZnOX:
++      {
++         // Z -> X, X -> Y, Y -> Z
++         fDefXSize = e.Z(); fDefYSize = e.X();
++         break;
++      }
+    }
+ 
+    fDollyDefault  = 1.25*0.5*TMath::Sqrt(3)*fVolume.Extents().Mag();
+--- graf3d/gl/inc/TGLOrthoCamera.h
++++ graf3d/gl/inc/TGLOrthoCamera.h
+@@ -36,7 +36,7 @@ class TGLOrthoCamera : public TGLCamera
+ {
+ public:
+    enum EType { kZOY,  kXOZ,  kXOY,    // Pair of world axes aligned to h/v screen.
+-                kZnOY, kXnOZ, kXnOY }; // 'n' means preceding axis is negated.
++                kZnOY, kXnOZ, kXnOY, kZOX, kZnOX}; // 'n' means preceding axis is negated.
+ private:
+    // Fields
+    EType          fType;         // camera type
+--- graf3d/gl/inc/TGLEmbeddedViewer.h
++++ graf3d/gl/inc/TGLEmbeddedViewer.h
+@@ -52,6 +52,7 @@ public:
+    TGLOrthoCamera     *GetOrthoXOYCamera() { return &fOrthoXOYCamera; }
+    TGLOrthoCamera     *GetOrthoXOZCamera() { return &fOrthoXOZCamera; }
+    TGLOrthoCamera     *GetOrthoZOYCamera() { return &fOrthoZOYCamera; }
++   TGLOrthoCamera     *GetOrthoZOXCamera() { return &fOrthoZOXCamera; }
+ 
+    ClassDef(TGLEmbeddedViewer, 0); // Embedded GL viewer.
+ };

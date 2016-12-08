@@ -36,6 +36,20 @@ if [ ! -d  $SIMPATH/generators/EvtGen ];then
  cp lib/libEvtGenExternal.so $SIMPATH_INSTALL/lib
  cp lib/libEvtGen.so $SIMPATH_INSTALL/lib
 
+ if [ ! -d  $SIMPATH_INSTALL/share/EvtGen ];then
+  mkdir -p $SIMPATH_INSTALL/share/EvtGen
+ fi
+ if [ ! -d  $SIMPATH_INSTALL/include/EvtGen ];then
+  mkdir -p $SIMPATH_INSTALL/include/EvtGen
+ fi
+ cp *.XML $SIMPATH_INSTALL/share/EvtGen
+ cp *.DEC $SIMPATH_INSTALL/share/EvtGen
+ cp evt.pdl $SIMPATH_INSTALL/share/EvtGen
+ cp -r EvtGen $SIMPATH_INSTALL/include/EvtGen/
+ cp -r EvtGenBase $SIMPATH_INSTALL/include/EvtGen/
+ cp -r EvtGenExternal $SIMPATH_INSTALL/include/EvtGen/
+ cp -r EvtGenModels $SIMPATH_INSTALL/include/EvtGen/
+
  echo Setup done.
 fi
 
