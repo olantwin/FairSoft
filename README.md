@@ -1,4 +1,4 @@
-#FairSoft
+# FairSoft
 
 This repository contain the installation routines of all the external software needed
 to compile and use FairRoot.
@@ -10,7 +10,7 @@ The scripts work on most Linux flavors and on Mac OSX. If you encounter any prob
 please create an issue at https://fairroot-redmine.gsi.de . To do this you have to
 register and/or login first.
 
-##Prerequisites
+## Prerequisites
 
 The script needs a complete build environment to compile all the source code. A list
 of all needed system packages can be found in the DEPENDENCIES file. All these system
@@ -19,7 +19,12 @@ complete command lines to install all packages in one go are also added in the
 DEPENDENCIES file, so one only has to cut-n-paste the appropriate command line to a
 terminal window and start the installation.
 
-##Guided Installation
+## SHiP specific installation instruction
+see  https://github.com/ShipSoft/FairShip 
+
+below are the original instructions of FairSoft 
+
+## Guided Installation
 
 To start the installation procedure one has to run the configure.sh script which is
 found in the main directory of FairSoft from within this directory. If the script is
