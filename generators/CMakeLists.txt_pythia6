@@ -36,9 +36,10 @@ Add_Library(Pythia6 SHARED ${Pythia_FSRCS} ${Pythia_CSRCS})
 # Check if gfortran library has to specified explicit
 # This is needed so far on Mac OSX and gcc6
 If(CMAKE_SYSTEM_NAME MATCHES Darwin)
+  SET(CMAKE_SHARED_LIBRARY_CREATE_Fortran_FLAGS "${CMAKE_SHARED_LIBRARY_CREATE_Fortran_FLAGS} -flat_namespace -single_module -undefined dynamic_lookup")
+
   Execute_Process(COMMAND gfortran -dumpversion
-                  OUTPUT_VARIABLE _gfortran_version
-                 )
+                  OUTPUT_VARIABLE _gfortran_version)
   String(SUBSTRING ${_gfortran_version} 0 1 _gfortran_major_version)
   If(${_gfortran_major_version} GREATER 5)
     Execute_Process(COMMAND gfortran -print-file-name=libgfortran.dylib
