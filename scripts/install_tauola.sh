@@ -14,11 +14,11 @@ if (not_there $soft $checkfile); then
   cd $SIMPATH/generators
   download_file $TAUOLA_LOCATION/TAUOLA.$TAUOLA_VERSION/TAUOLA.$TAUOLA_VERSION.tar.gz
   tar -xzf TAUOLA.$TAUOLA_VERSION.tar.gz
-  # Patch TAUOLA on Darwin (Mac)
+  # Patch TAUOLA on Darwin (Mac), ignore whitespace (-l)
   if [ "$osArch" == "Darwin" ]; then
-   patch -p0 < tauola_Darwin.patch
-   patch -p0 < tauola_Darwin_f77_photos.patch
-   patch -p0 < tauola_Darwin_f77_tauola.patch
+   patch -l -p0 < tauola_Darwin.patch
+   patch -l -p0 < tauola_Darwin_f77_photos.patch
+   patch -l -p0 < tauola_Darwin_f77_tauola.patch
   fi
 
   echo Installing TAUOLA
