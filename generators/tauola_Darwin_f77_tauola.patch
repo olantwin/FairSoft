@@ -1,14 +1,15 @@
---- TAUOLA/tauola-fortran/tauola-F/makefile.org	2017-05-15 13:53:00.000000000 +0200
-+++ TAUOLA/tauola-fortran/tauola-F/makefile	2017-05-15 14:13:30.000000000 +0200
-@@ -11,6 +11,7 @@
+--- TAUOLA/tauola-fortran/tauola-F/makefile.org	2017-05-18 17:39:14.000000000 +0200
++++ TAUOLA/tauola-fortran/tauola-F/makefile	2017-05-18 17:43:44.000000000 +0200
+@@ -10,7 +10,7 @@
+ 	@rm -f *.o
  	@rm -f *.a
  	@rm -f *~
- 	@rm -f prod/*.f
+-	@rm -f prod/*.f
 +	@rm -f prod/*.f77
  	@rm -f *.diff
  	@rm -rf ../tauola
 
-@@ -32,25 +33,25 @@
+@@ -32,25 +32,25 @@
 
  CePeCe: HEPEVT clean tauola-dir
  	@echo Preparing CPC version of tauola in ../tauola
@@ -43,7 +44,7 @@
  	@echo "CPC">../tauola/version
  	@echo "        **************************************************"
  	@echo "        *                                                *"
-@@ -64,7 +65,7 @@
+@@ -64,7 +64,7 @@
  #-----
  CLEO: HEPEVT clean  tauola-dir
  	@echo Preparing CLEO version of tauola in ../tauola
@@ -52,7 +53,7 @@
  #     fill directory prod of CLEO version
  	@( $(CPP) $(CPPFLAGS) -DCLEO    formf.F prod/formf.f)
  	@( $(CPP) $(CPPFLAGS) -DCLEO    tauola.F prod/tauola.f)
-@@ -74,18 +75,18 @@
+@@ -74,18 +74,18 @@
  	@( cp  makefile.cleo prod/makefile)
  	@( cp  makefile.templ.cleo prod/makefile.templ)
  #     create interfaces
@@ -79,7 +80,7 @@
  	@echo "CLEO" > ../tauola/version
  	@echo "        **************************************************"
  	@echo "        *                                                *"
-@@ -99,25 +100,25 @@
+@@ -99,25 +99,25 @@
  #----
  ALEPH: HEPEVT  clean  tauola-dir
  	@echo Preparing ALEPH version of tauola in ../tauola
@@ -114,7 +115,7 @@
  	@echo "ALEPH" > ../tauola/version
  	@echo "        **************************************************"
  	@echo "        *                                                *"
-@@ -132,7 +133,7 @@
+@@ -132,7 +132,7 @@
  #----
  Tauface:
  	@echo "Copying Tauface to ../KK2f"

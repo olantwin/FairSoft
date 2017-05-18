@@ -1,5 +1,5 @@
---- TAUOLA/tauola-fortran/photos-F/makefile.org	2017-05-15 13:39:42.000000000 +0200
-+++ TAUOLA/tauola-fortran/photos-F/makefile	2017-05-15 13:45:58.000000000 +0200
+--- TAUOLA/tauola-fortran/photos-F/makefile.org	2017-05-18 17:33:41.000000000 +0200
++++ TAUOLA/tauola-fortran/photos-F/makefile	2017-05-18 17:33:55.000000000 +0200
 @@ -16,7 +16,7 @@
  clean:
  	@echo Cleaning ...
