@@ -61,13 +61,16 @@ unset ROOTDICTTYPE
 unset PLATFORM
 
 export SIMPATH=$PWD
-# if on lxplus
-distribution=$(lsb_release -is)
-version=$(lsb_release -rs | cut -f1 -d.)     
 
-if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
- # operating system of last century, need newer gcc / python
-  eval "$(/afs/cern.ch/sw/lcg/releases/lcgenv/latest/lcgenv -p /afs/cern.ch/sw/lcg/releases/LCG_85 x86_64-slc6-gcc49-opt Python)"
+if `which lsb_release > /dev/null 2>&1` ; then
+   # if on lxplus
+   distribution=$(lsb_release -is)
+   version=$(lsb_release -rs | cut -f1 -d.)
+
+   if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
+      # operating system of last century, need newer gcc / python
+      eval "$(/afs/cern.ch/sw/lcg/releases/lcgenv/latest/lcgenv -p /afs/cern.ch/sw/lcg/releases/LCG_85 x86_64-slc6-gcc49-opt Python)"
+   fi
 fi
 
 # Set the cache file name
@@ -222,6 +225,18 @@ then
   source scripts/install_boost.sh
 fi
 
+##################### LHAPDF ##################################################
+
+if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
+  source scripts/install_lhapdf.sh
+fi
+
+##################### PDFSET ##################################################
+
+if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
+  source scripts/install_pdfset.sh
+fi
+
 ##################### Pythia 6 #############################################
 
 if [ "$check" = "1" -a "$onlyreco" = "0" ];
@@ -236,12 +251,6 @@ then
   source scripts/install_hepmc.sh
 fi
 
-##################### LHAPDF ##################################################
-
-if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
-  source scripts/install_lhapdf.sh
-fi
-
 ##################### tauola ##################################################
 
 if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
@@ -253,7 +262,6 @@ fi
 if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
   source scripts/install_photos.sh
 fi
-
 
 ##################### evtgen ##################################################
 
@@ -353,10 +361,10 @@ fi
 
 ##################### LibSodium ##################################################
 
-if [ "$check" = "1" ];
-then
-  source scripts/install_sodium.sh
-fi
+#if [ "$check" = "1" ];
+#then
+#  source scripts/install_sodium.sh
+#fi
 
 ##################### ZeroMQ ##################################################
 
@@ -379,13 +387,6 @@ then
   source scripts/install_nanomsg.sh
 fi
 
-
-##################### PDFSET ##################################################
-
-if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
-  source scripts/install_pdfset.sh
-fi
-
 ##################### LOG4CPP ##################################################
 
 if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
@@ -400,6 +401,7 @@ fi
 if [ "$check" = "1" -a "$onlyreco" = "0" ]; then
   source scripts/install_genie.sh
 fi
+
 
 if [ "$check" = "1" ];
 then

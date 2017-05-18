@@ -1,0 +1,73 @@
+--- TAUOLA/tauola-fortran/photos-F/makefile.org	2017-05-15 13:39:42.000000000 +0200
++++ TAUOLA/tauola-fortran/photos-F/makefile	2017-05-15 13:45:58.000000000 +0200
+@@ -16,7 +16,7 @@
+ clean:
+ 	@echo Cleaning ...
+ 	@rm -f *.o; rm -f *.a
+-	@rm -f photos.f
++	@rm -f photos.f77
+ 	@rm -f *~
+ 	@echo "   Removing old instalation..."
+ 	@rm -rf ../photos
+@@ -26,32 +26,32 @@
+ 	@echo Preprocessing photos.F for KK ...
+ 	@echo Creating symbolic link for HEPEVT include file:
+ 	@ln -s ../include/HEPEVT-KKMC.h ../include/HEPEVT.h
+-	@$(CPP) $(CPPFLAGS) -DKORALK  photos.F photos.f
+-	@$(CPP) $(CPPFLAGS) -DKORALK  demo/phodem.F demo/phodem.f
++	@$(CPP) $(CPPFLAGS) -DKORALK  photos.F photos.f77
++	@$(CPP) $(CPPFLAGS) -DKORALK  demo/phodem.F demo/phodem.f77
+ 4kD:
+ 	@echo Preprocessing photos.F for HEPEVT: 4000 DOUBLE PRECISSION ...
+ 	@echo Creating symbolic link for HEPEVT include file:
+ 	@ln -s ../include/HEPEVT-FOURD.h ../include/HEPEVT.h
+-	@$(CPP) $(CPPFLAGS) -DCZTERYD photos.F photos.f
+-	@$(CPP) $(CPPFLAGS) -DCZTERYD  demo/phodem.F demo/phodem.f
++	@$(CPP) $(CPPFLAGS) -DCZTERYD photos.F photos.f77
++	@$(CPP) $(CPPFLAGS) -DCZTERYD  demo/phodem.F demo/phodem.f77
+ 2kR:
+ 	@echo Preprocessing photos.F for HEPEVT: 2000 REAL*4 ...
+ 	@echo Creating symbolic link for HEPEVT include file:
+ 	@ln -s ../include/HEPEVT-TWOR.h ../include/HEPEVT.h
+-	@$(CPP) $(CPPFLAGS) -DDWAR    photos.F photos.f
+-	@$(CPP) $(CPPFLAGS) -DDWAR  demo/phodem.F demo/phodem.f
++	@$(CPP) $(CPPFLAGS) -DDWAR    photos.F photos.f77
++	@$(CPP) $(CPPFLAGS) -DDWAR  demo/phodem.F demo/phodem.f77
+ 2kD:
+ 	@echo Preprocessing photos.F for HEPEVT: 2000 REAL*8 ...
+ 	@echo Creating symbolic link for HEPEVT include file:
+ 	@ln -s ../include/HEPEVT-TWOD.h ../include/HEPEVT.h
+-	@$(CPP) $(CPPFLAGS) -DDWAD    photos.F photos.f
+-	@$(CPP) $(CPPFLAGS) -DDWAD  demo/phodem.F demo/phodem.f
++	@$(CPP) $(CPPFLAGS) -DDWAD    photos.F photos.f77
++	@$(CPP) $(CPPFLAGS) -DDWAD  demo/phodem.F demo/phodem.f77
+ 10kD:
+ 	@echo Preprocessing photos.F for HEPEVT: 10000 DOUBLE PRECISSION ...
+ 	@echo Creating symbolic link for HEPEVT include file:
+ 	@ln -s ../include/HEPEVT-TEND.h ../include/HEPEVT.h
+-	@$(CPP) $(CPPFLAGS) -DDZIESD  photos.F photos.f
+-	@$(CPP) $(CPPFLAGS) -DDZIESD  demo/phodem.F demo/phodem.f
++	@$(CPP) $(CPPFLAGS) -DDZIESD  photos.F photos.f77
++	@$(CPP) $(CPPFLAGS) -DDZIESD  demo/phodem.F demo/phodem.f77
+
+ KK-all:   clean KK   install
+ 4kD-all:  clean 4kD  install
+@@ -63,15 +63,15 @@
+ 	@echo "Installing sources in ../photos"
+ 	@(cp makefile-F ../photos/makefile)
+ 	@(cp makefile.templ ../photos/makefile.templ)
+-	@(cp photos.f ../photos/photos.f)
++	@(cp photos.f77 ../photos/photos.f)
+ 	@(cp demo/makefile ../photos/demo/makefile)
+ 	@(cp demo/prod/go ../photos/demo/prod/go)
+ 	@(cp demo/prod/baza.output ../photos/demo/prod/baza.output)
+ 	@(cp demo/prod/nowy.output ../photos/demo/prod/nowy.output)
+
+-demo-fill: demo/phodem.f ../photos/demo
++demo-fill: demo/phodem.f77 ../photos/demo
+ 	@echo "Installing demo in ../photos/demo"
+-	@(cp demo/phodem.f ../photos/demo/phodem.f)
++	@(cp demo/phodem.f77 ../photos/demo/phodem.f)
+
+ photos-dir: ../photos ../photos/demo ../photos/demo/prod  ../photos/demo/tex
+ 	@echo "Creating directories ..."

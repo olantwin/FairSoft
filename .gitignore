@@ -44,6 +44,7 @@ tools/log4cpp/
 tools/Makefile
 tools/bcb5/
 tools/build_lhapdf-5.9.1/
+tools/build_log4cpp/
 tools/config.log
 tools/config.status
 tools/config/
@@ -59,11 +60,11 @@ tools/msvc6/
 tools/openvms/
 tools/src/
 tools/tests/
-transport/geant4.10.01.p02.tar.gz
-transport/geant4.10.01.p02/
 transport/geant3/
 transport/geant321+_vmc.1.15a.tar.gz
 transport/geant4
+transport/geant4.10.02.p01.tar.gz
+transport/geant4.10.02.p01/
 transport/geant4.10.01.p02.tar.gz
 transport/geant4.10.01.p02/
 transport/geant4.10.01.tar.gz

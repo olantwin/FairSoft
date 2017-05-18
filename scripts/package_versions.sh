@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CMAKE_LOCATION="http://www.cmake.org/files/v3.3/"
+export CMAKE_LOCATION="http://www.cmake.org/files/v3.7/"
 export CMAKEVERSION_REQUIRED=cmake-3.1.0
 export CMAKEVERSION=cmake-3.3.2
 
@@ -33,19 +33,25 @@ export MESA_LOCATION="ftp://ftp.freedesktop.org/pub/mesa/older-versions/7.x/7.10
 export MESAVERSION=MesaLib-7.10.3
 
 export GEANT4_LOCATION="http://geant4.cern.ch/support/source/"
-export GEANT4VERSION=geant4.10.01.p02
-export GEANT4VERSIONp=Geant4-10.1.2
+# to be changed when linux version also changed to new version of G4
+if [ "$arch" = "macosx" ]; then
+   export GEANT4VERSION=geant4.10.02.p01
+   export GEANT4VERSIONp=Geant4-10.2.1
+else
+   export GEANT4VERSION=geant4.10.01.p02
+   export GEANT4VERSIONp=Geant4-10.1.2
+fi
 
-export ROOT_LOCATION="http://root.cern.ch/git/root.git"
+export ROOT_LOCATION="https://github.com/root-project/root.git"
 if [ "$build_root6" = "yes" ]; then
   # Root v6.06.08
   export ROOTVERSION=v6-06-08
 else
-  # Root v5.34.32
+  # Root v5.34.34
   export ROOTVERSION=v5-34-34
 fi
 
-export XROOTDVERSION=4.4.0
+export XROOTDVERSION=4.5.0
 
 export PLUTO_LOCATION="http://web-docs.gsi.de/%7Ehadeshyp/pluto/v5.37/"
 export PLUTOVERSION=pluto_v5.37
@@ -58,7 +64,12 @@ export VGMVERSION=v4-3
 export VGMDIR=VGM-4.3.0
 
 export GEANT4VMC_LOCATION="http://root.cern.ch/git/geant4_vmc.git"
-export GEANT4VMCBRANCH=v3-2
+# to be changed when linux version also changed to new version of G4
+if [ "$arch" = "macosx" ]; then
+   export GEANT4VMCBRANCH=v3-3
+else
+   export GEANT4VMCBRANCH=v3-2
+fi
 
 export MILLEPEDE_LOCATION="http://svnsrv.desy.de/public/MillepedeII/tags/"
 export MILLEPEDE_VERSION=V04-03-01

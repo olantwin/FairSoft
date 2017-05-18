@@ -28,8 +28,9 @@ then
 
   cd $SIMPATH/generators/pythia8
 
-  # needed to compile with Apple LLVM 5.1, shouldn't hurt on other systems
-  mypatch ../pythia8_friend.patch | tee -a $logfile
+  # needed to link with correct gfortran run-time
+  mypatch ../pythia8_Darwin.patch | tee -a $logfile
+
   USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared  --with-hepmc3-lib=$HEPINSTALLDIR/lib --with-hepmc3-include=$HEPINSTALLDIR/include  --with-hepmc3-version=$HEPMCVERSION  --with-lhapdf5-lib=$HEPINSTALLDIR/lib --with-lhapdf5-include=$HEPINSTALLDIR/include --with-lhapdf5-version=$LHAPDF_VERSION
 
   if [ "$compiler" = "PGI" ];
@@ -57,13 +58,13 @@ then
   mkdir -p $install_prefix/share/pythia8
   if [ -d share/xmldoc ];
   then
-   cp -r share/xmldoc $install_prefix/share/pythia8
+   cp -rf share/xmldoc $install_prefix/share/pythia8
   elif [ -d share/Pythia8/xmldoc ];
   then
-   cp -r share/Pythia8/xmldoc $install_prefix/share/pythia8
+   cp -rf share/Pythia8/xmldoc $install_prefix/share/pythia8
   elif [ -d xmldoc ];
   then
-   cp -r xmldoc $install_prefix/share/pythia8
+   cp -rf xmldoc $install_prefix/share/pythia8
   else
    echo "Pythia8 data not found"
   fi
@@ -74,13 +75,14 @@ then
   if [ "$platform" = "macosx" ];
   then
     cp lib/libpythia8.dylib $install_prefix/lib
-    cp lib/liblhapdfdummy.dylib $install_prefix/lib
-    cp lib/libpythia8tohepmc.dylib $install_prefix/lib
+    #cp lib/liblhapdfdummy.dylib $install_prefix/lib
+    cp lib/libpythia8lhapdf5.so $install_prefix/lib
+    cp lib/libpythia8tohepmc.so $install_prefix/lib
     cd $install_prefix/lib
     for file in $(ls libpythia8*.dylib); do
       install_name_tool -id $install_prefix/lib/$file $file
     done
-    for file in $(ls liblhapdf*.dylib); do
+    for file in $(ls libpythia8lhapdf*.so); do
       install_name_tool -id $install_prefix/lib/$file $file
     done
     create_links dylib so

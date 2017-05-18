@@ -1,0 +1,125 @@
+--- TAUOLA/tauola-fortran/tauola-F/makefile.org	2017-05-15 13:53:00.000000000 +0200
++++ TAUOLA/tauola-fortran/tauola-F/makefile	2017-05-15 14:13:30.000000000 +0200
+@@ -11,6 +11,7 @@
+ 	@rm -f *.a
+ 	@rm -f *~
+ 	@rm -f prod/*.f
++	@rm -f prod/*.f77
+ 	@rm -f *.diff
+ 	@rm -rf ../tauola
+
+@@ -32,25 +33,25 @@
+
+ CePeCe: HEPEVT clean tauola-dir
+ 	@echo Preparing CPC version of tauola in ../tauola
+-	@( rm -f standalone-F/*.f )
++	@( rm -f standalone-F/*.f77 )
+ #     fill directory prod of CPC version
+ 	@( $(CPP) $(CPPFLAGS) -DCePeCe  formf.F prod/formf.f )
+ 	@( $(CPP) $(CPPFLAGS) -DCePeCe  tauola.F prod/tauola.f)
+ 	@( cp  makefile.cpc prod/makefile)
+ 	@( cp  makefile.templ.cpc prod/makefile.templ)
+ #     create interfaces
+-	@( $(CPP) $(CPPFLAGS) -DCePeCe  tauface-KK-F/Tauface.F tauface-KK-F/Tauface.f)
+-	@( $(CPP) $(CPPFLAGS) -DCePeCe  standalone-F/taumain.F standalone-F/taumain.f)
+-	@( $(CPP) $(CPPFLAGS) -DCePeCe  jetset-F/tauola_photos_ini.F jetset-F/tauola_photos_ini.f)
+-	@( $(CPP) $(CPPFLAGS) -DCePeCe  jetset-F/tauface-jetset.F jetset-F/tauface-jetset.f)
++	@( $(CPP) $(CPPFLAGS) -DCePeCe  tauface-KK-F/Tauface.F tauface-KK-F/Tauface.f77)
++	@( $(CPP) $(CPPFLAGS) -DCePeCe  standalone-F/taumain.F standalone-F/taumain.f77)
++	@( $(CPP) $(CPPFLAGS) -DCePeCe  jetset-F/tauola_photos_ini.F jetset-F/tauola_photos_ini.f77)
++	@( $(CPP) $(CPPFLAGS) -DCePeCe  jetset-F/tauface-jetset.F jetset-F/tauface-jetset.f77)
+ #     fill true (external) ../tauola directory
+ 	@( cp prod/*.f ../tauola/.)
+ 	@( cp  makefile.cpc ../tauola/makefile)
+ 	@( cp  makefile.templ.cpc ../tauola/makefile.templ)
+-	@( cp  standalone-F/taumain.f ../tauola/demo-standalone/taumain.f )
+-	@( cp  tauface-KK-F/Tauface.f ../tauola/demo-KK-face )
+-	@(cp jetset-F/tauola_photos_ini.f ../tauola/demo-jetset/tauola_photos_ini.f)
+-	@(cp jetset-F/tauface-jetset.f ../tauola/demo-jetset/tauface-jetset.f)
++	@( cp  standalone-F/taumain.f77 ../tauola/demo-standalone/taumain.f )
++	@( cp  tauface-KK-F/Tauface.f77 ../tauola/demo-KK-face )
++	@(cp jetset-F/tauola_photos_ini.f77 ../tauola/demo-jetset/tauola_photos_ini.f)
++	@(cp jetset-F/tauface-jetset.f77 ../tauola/demo-jetset/tauface-jetset.f)
+ 	@echo "CPC">../tauola/version
+ 	@echo "        **************************************************"
+ 	@echo "        *                                                *"
+@@ -64,7 +65,7 @@
+ #-----
+ CLEO: HEPEVT clean  tauola-dir
+ 	@echo Preparing CLEO version of tauola in ../tauola
+-	@( rm -f standalone-F/*.f )
++	@( rm -f standalone-F/*.f77 )
+ #     fill directory prod of CLEO version
+ 	@( $(CPP) $(CPPFLAGS) -DCLEO    formf.F prod/formf.f)
+ 	@( $(CPP) $(CPPFLAGS) -DCLEO    tauola.F prod/tauola.f)
+@@ -74,18 +75,18 @@
+ 	@( cp  makefile.cleo prod/makefile)
+ 	@( cp  makefile.templ.cleo prod/makefile.templ)
+ #     create interfaces
+-	@( $(CPP) $(CPPFLAGS) -DCLEO    tauface-KK-F/Tauface.F tauface-KK-F/Tauface.f)
+-	@( $(CPP) $(CPPFLAGS) -DCLEO  standalone-F/taumain.F standalone-F/taumain.f)
+-	@( $(CPP) $(CPPFLAGS) -DCLEO  jetset-F/tauola_photos_ini.F jetset-F/tauola_photos_ini.f)
+-	@( $(CPP) $(CPPFLAGS) -DCLEO  jetset-F/tauface-jetset.F jetset-F/tauface-jetset.f)
++	@( $(CPP) $(CPPFLAGS) -DCLEO    tauface-KK-F/Tauface.F tauface-KK-F/Tauface.f77)
++	@( $(CPP) $(CPPFLAGS) -DCLEO  standalone-F/taumain.F standalone-F/taumain.f77)
++	@( $(CPP) $(CPPFLAGS) -DCLEO  jetset-F/tauola_photos_ini.F jetset-F/tauola_photos_ini.f77)
++	@( $(CPP) $(CPPFLAGS) -DCLEO  jetset-F/tauface-jetset.F jetset-F/tauface-jetset.f77)
+ #     fill true (external) ../tauola directory
+ 	@( cp prod/*.f ../tauola/.)
+ 	@( cp  makefile.cleo ../tauola/makefile)
+ 	@( cp  makefile.templ.cleo ../tauola/makefile.templ)
+-	@( cp  standalone-F/taumain.f ../tauola/demo-standalone/taumain.f )
+-	@( cp  tauface-KK-F/Tauface.f ../tauola/demo-KK-face )
+-	@(cp jetset-F/tauola_photos_ini.f ../tauola/demo-jetset/tauola_photos_ini.f)
+-	@(cp jetset-F/tauface-jetset.f ../tauola/demo-jetset/tauface-jetset.f)
++	@( cp  standalone-F/taumain.f77 ../tauola/demo-standalone/taumain.f )
++	@( cp  tauface-KK-F/Tauface.f77 ../tauola/demo-KK-face )
++	@(cp jetset-F/tauola_photos_ini.f77 ../tauola/demo-jetset/tauola_photos_ini.f)
++	@(cp jetset-F/tauface-jetset.f77 ../tauola/demo-jetset/tauface-jetset.f)
+ 	@echo "CLEO" > ../tauola/version
+ 	@echo "        **************************************************"
+ 	@echo "        *                                                *"
+@@ -99,25 +100,25 @@
+ #----
+ ALEPH: HEPEVT  clean  tauola-dir
+ 	@echo Preparing ALEPH version of tauola in ../tauola
+-	@( rm -f standalone-F/*.f )
++	@( rm -f standalone-F/*.f77 )
+ #     fill directory prod of ALEPH version
+ 	@$(CPP) $(CPPFLAGS) -DALEPH   formf.F prod/formf.f
+ 	@$(CPP) $(CPPFLAGS) -DALEPH   tauola.F prod/tauola.f
+ 	@( cp  makefile.cpc prod/makefile)
+ 	@( cp  makefile.templ.cpc prod/makefile.templ)
+ #     create interfaces
+-	@( $(CPP) $(CPPFLAGS) -DALEPH    tauface-KK-F/Tauface.F tauface-KK-F/Tauface.f)
+-	@( $(CPP) $(CPPFLAGS) -DALEPH  standalone-F/taumain.F standalone-F/taumain.f)
+-	@( $(CPP) $(CPPFLAGS) -DALEPH  jetset-F/tauola_photos_ini.F jetset-F/tauola_photos_ini.f)
+-	@( $(CPP) $(CPPFLAGS) -DALEPH  jetset-F/tauface-jetset.F jetset-F/tauface-jetset.f)
++	@( $(CPP) $(CPPFLAGS) -DALEPH    tauface-KK-F/Tauface.F tauface-KK-F/Tauface.f77)
++	@( $(CPP) $(CPPFLAGS) -DALEPH  standalone-F/taumain.F standalone-F/taumain.f77)
++	@( $(CPP) $(CPPFLAGS) -DALEPH  jetset-F/tauola_photos_ini.F jetset-F/tauola_photos_ini.f77)
++	@( $(CPP) $(CPPFLAGS) -DALEPH  jetset-F/tauface-jetset.F jetset-F/tauface-jetset.f77)
+ #     fill true (external) ../tauola directory
+ 	@( cp prod/*.f ../tauola/.)
+ 	@( cp  makefile.cpc ../tauola/makefile)
+ 	@( cp  makefile.templ.cpc ../tauola/makefile.templ)
+-	@( cp  standalone-F/taumain.f ../tauola/demo-standalone/taumain.f )
+-	@( cp  tauface-KK-F/Tauface.f ../tauola/demo-KK-face )
+-	@(cp jetset-F/tauola_photos_ini.f ../tauola/demo-jetset/tauola_photos_ini.f)
+-	@(cp jetset-F/tauface-jetset.f ../tauola/demo-jetset/tauface-jetset.f)
++	@( cp  standalone-F/taumain.f77 ../tauola/demo-standalone/taumain.f )
++	@( cp  tauface-KK-F/Tauface.f77 ../tauola/demo-KK-face )
++	@(cp jetset-F/tauola_photos_ini.f77 ../tauola/demo-jetset/tauola_photos_ini.f)
++	@(cp jetset-F/tauface-jetset.f77 ../tauola/demo-jetset/tauface-jetset.f)
+ 	@echo "ALEPH" > ../tauola/version
+ 	@echo "        **************************************************"
+ 	@echo "        *                                                *"
+@@ -132,7 +133,7 @@
+ #----
+ Tauface:
+ 	@echo "Copying Tauface to ../KK2f"
+-	@(cp tauface-KK-F/Tauface.f ../KK2f/Tauface.f)
++	@(cp tauface-KK-F/Tauface.f77 ../KK2f/Tauface.f)
+
+ tauola-dir: ../tauola ../tauola/demo-standalone ../tauola/demo-standalone/prod ../tauola/demo-jetset ../tauola/demo-jetset/prod ../tauola/demo-KK-face
+ 	@echo "Preparing distribution directory ../tauola"

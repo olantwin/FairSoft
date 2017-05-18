@@ -26,10 +26,18 @@ if [ ! -d  $SIMPATH/generators/$soft ]; then
     echo "*** Configure GENIE with c++11 ***"
     mysed "GOPT_WITH_CXX_USERDEF_FLAGS=" "GOPT_WITH_CXX_USERDEF_FLAGS=-std=c++11" $SIMPATH/generators/$soft/src/make/Make.include
   fi 
+  if [ "$platform" = "macosx" ]; then
+     echo "*** Set macOS compilers and options ***"
+     mysed "-flat_namespace" "" $SIMPATH/generators/$soft/src/make/Make.include
+     mysed "CXX = g++" "CXX = clang++" $SIMPATH/generators/$soft/src/make/Make.include
+     mysed "LD  = g++" "LD  = clang++" $SIMPATH/generators/$soft/src/make/Make.include
+  fi
 # fix errors in gtestINukeHadroXSec, gVldSampleScan
   mysed "ifstream test_file;" "std::ifstream test_file;" $SIMPATH/generators/$soft/src/validation/Intranuke/gtestINukeHadroXSec.cxx
   mysed "ofstream xsec_file;" "std::ofstream xsec_file;" $SIMPATH/generators/$soft/src/validation/Intranuke/gtestINukeHadroXSec.cxx
   mysed "ofstream" "std::ofstream" $SIMPATH/generators/$soft/src/validation/EvScan/gVldSampleScan.cxx
+  mysed "setiosflags" "std::setiosflags" $SIMPATH/generators/$soft/src/Numerical/Spline.cxx
+  mysed "setiosflags" "std::setiosflags" $SIMPATH/generators/$soft/src/GHEP/GHepParticle.cxx
   if [ -d  $soft ]; then
     ln -s $soft genie
   fi
@@ -65,6 +73,12 @@ if (not_there $soft $checkfile); then
   cp $SIMPATH/generators/$soft/lib/* $install_prefix/lib
   cp $SIMPATH/generators/$soft/bin/* $install_prefix/bin
 
+  if [ "$platform" = "macosx" ];
+  then
+      cd $install_prefix/lib
+      create_links dylib so
+  fi
+
   check_all_libraries $install_prefix/lib
   check_success $soft $checkfile
   check=$?
@@ -82,5 +96,6 @@ if [ -f $SIMPATH/generators/$soft/src/Algorithm/_ROOT_DICT_Algorithm_rdict.pcm ]
 fi
 # don't know any better solution but we need the charm decaying in Genie for the moment
 cp $SIMPATH/generators/UserPhysicsOptions.xml $SIMPATH/generators/$soft/config/
-cd  $SIMPATH
+cd $SIMPATH
+
 return 1

@@ -1,0 +1,11 @@
+--- EvtGen/R01-06-00/configure.org	2017-05-15 14:57:32.000000000 +0200
++++ EvtGen/R01-06-00/configure	2017-05-15 15:05:11.000000000 +0200
+@@ -253,6 +253,8 @@
+
+ # Mac OS platform with gcc4
+ if [[ $ARCH == Darwin* ]]; then
++  CXX=clang++
++  CPP11=1
+   tt=`gfortran -print-search-dirs|grep libraries|cut -d'=' -f2|sed  's/:/ /g'`
+   LIBGFORTRANLOCATION=''
+   for i in $tt

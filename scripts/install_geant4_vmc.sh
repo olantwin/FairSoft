@@ -17,7 +17,7 @@ then
 
   cd $SIMPATH/transport/geant4_vmc
 
-  # patch allowing neutrinos from external decayer to be copied to stack 
+  # patch allowing neutrinos from external decayer to be copied to stack
   mypatch ../geant4vmc_neutrino.patch
 
   # patch needed when using gcc5
@@ -28,6 +28,8 @@ then
       mypatch ../geant4vmc_gcc5.patch
     fi
   fi
+
+  source $SIMPATH_INSTALL/bin/thisroot.sh
 
   mkdir build
   cd build

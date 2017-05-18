@@ -20,8 +20,8 @@ checkfile=$install_prefix/lib/liblog4cpp.so
 
 if (not_there $soft $checkfile); then
 
-  mkdir $SIMPATH_BUILD/build_$soft
-  cd $SIMPATH_BUILD/build_$soft
+  mkdir $SIMPATH/tools/build_$soft
+  cd $SIMPATH/tools/build_$soft
 
   debug_=""
   if [ "$debug" = "yes" ]; then
@@ -33,10 +33,17 @@ if (not_there $soft $checkfile); then
   $MAKE_command
   $MAKE_command install
 
+  if [ "$platform" = "macosx" ];
+  then
+      cd $install_prefix/lib
+      create_links dylib so
+  fi
+
   check_all_libraries $install_prefix/lib
   check_success $soft $checkfile
   check=$?
 fi
 
 cd  $SIMPATH
+
 return 1

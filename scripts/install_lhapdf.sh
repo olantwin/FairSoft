@@ -6,7 +6,7 @@
 # If not download it a from the lhapdf web server and unpack it
 
 soft="lhapdf-${LHAPDF_VERSION}"
-echo "*** Install $soft sources in $SIMPATH and copy to $SIMPATH_INSTALL ***"
+#echo "*** Install $soft sources in $SIMPATH and copy to $SIMPATH_INSTALL ***"
 if [ ! -d  $SIMPATH/tools/$soft ]; then 
   cd $SIMPATH/tools
   if [ ! -e $SIMPATH/tools/$LHAPDF_TAR ]; then
@@ -32,6 +32,12 @@ if (not_there $soft $checkfile); then
                 --srcdir=$SIMPATH/tools/$soft $debug_
   $MAKE_command 
   $MAKE_command install 2>&1 | tee make_install_${soft}.log
+
+  if [ "$platform" = "macosx" ];
+  then
+      cd $install_prefix/lib
+      create_links dylib so
+  fi
 
   check_all_libraries $install_prefix/lib
   check_success $soft $checkfile
