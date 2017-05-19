@@ -87,12 +87,6 @@ then
   # needed to solve problem with double TPythia8 instance
   mypatch ../root_TPythia8decayer.patch
 
-  # needed to solve problem with the TGeoManger for some CBM and Panda geometries
-  mypatch ../root_TGeoShape.patch
-
-  # needed due to some problem with the ALICE HLT code
-  mypatch ../root5_34_19_hlt.patch
-
   if [ "$build_root6" = "yes" ]; then
     # adding ortho camera zx
     mypatch ../root6_orthoZOX.patch
@@ -101,19 +95,15 @@ then
     mypatch ../root6_00_find_xrootd.patch
     # patches from Fedora, hopefully obsoleted in future by root6.08;
     # needed to compile root6 with gcc 6:
-    if [ "$compiler" = "gcc" ];
-    then
-      GCC_MAJOR=$(gcc -dumpversion | cut -c 1)
-      if [ "$GCC_MAJOR" -gt 4  ];
-      then
-        mypatch ../root-no-abi-check.patch
-        mypatch ../root-abitags.patch
-      fi
-    fi
   fi
 
   if [ "$build_root6" = "no" ]; then
     mypatch ../root5_34_find_xrootd.patch
+  # needed due to some problem with the ALICE HLT code
+    mypatch ../root5_34_19_hlt.patch
+  # needed to solve problem with the TGeoManger for some CBM and Panda geometries
+    mypatch ../root_TGeoShape.patch
+
   fi
   cd build_for_fair/
   . rootconfig.sh
