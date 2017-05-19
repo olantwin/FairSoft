@@ -5,6 +5,8 @@ libraries_*.log
 basics/cmake
 basics/cmake-3.3.2.tar.gz
 basics/cmake-3.3.2/
+basics/cmake-3.5.2.tar.gz
+basics/cmake-3.5.2/
 basics/icu
 basics/icu4c-53_1-src.tgz
 basics/MillepedeII/
@@ -92,3 +94,4 @@ generators/PHOTOS.3.61.tar.gz
 generators/PHOTOS
 generators/TAUOLA.1.1.5.tar.gz
 generators/TAUOLA
+generators/applied_patches.txt
