@@ -45,7 +45,7 @@ then
   if [ "$platform" = "macosx" ]; then
     mypatch ../geant4.10.00_clang_osx.patch
     if [ -f ../${GEANT4VERSION}_cmake.patch ]; then
-      mypatch ../geant4.10.00.p02_cmake.patch
+      mypatch ../${GEANT4VERSION}_cmake.patch
     fi
     if [ "$compiler" = "Clang" ]; then
       clang_vers=`clang -v 2>&1 >/dev/null | sed -n 's/Apple LLVM version//p' | cut -d . -f 1`
