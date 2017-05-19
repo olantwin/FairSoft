@@ -69,7 +69,7 @@ if `which lsb_release > /dev/null 2>&1` ; then
 
    if [ "$distribution$version" = "ScientificCERNSLC6" ]; then
       # operating system of last century, need newer gcc / python
-      eval "$(/afs/cern.ch/sw/lcg/releases/lcgenv/latest/lcgenv -p /afs/cern.ch/sw/lcg/releases/LCG_85 x86_64-slc6-gcc49-opt Python)"
+      eval "$(/afs/cern.ch/sw/lcg/releases/lcgenv/latest/lcgenv -p /afs/cern.ch/sw/lcg/releases/LCG_87 x86_64-slc6-gcc62-opt Python)"
    fi
 fi
 
