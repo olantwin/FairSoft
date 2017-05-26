@@ -31,6 +31,8 @@ then
   mkdir build_cmake
   cd build_cmake
 
+  source $SIMPATH_INSTALL/bin/thisroot.sh
+
   # the Geant4_DIR points to the directory where the Geant4Config.cmake script is
   # located. In this file all needed variables are defined.
   cmake .. -DGeant4_DIR=$SIMPATH_INSTALL/lib/$GEANT4VERSIONp \

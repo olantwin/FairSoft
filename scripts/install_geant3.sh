@@ -57,6 +57,9 @@ then
 
   mkdir build
   cd build
+
+  source $SIMPATH_INSTALL/bin/thisroot.sh
+
   cmake .. -DCMAKE_INSTALL_PREFIX=$SIMPATH_INSTALL \
            -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_COMPILER=$CC \
            -DROOT_DIR=$SIMPATH_INSTALL

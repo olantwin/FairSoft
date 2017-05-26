@@ -15,6 +15,8 @@ then
     mkdir build_g4py
     cd build_g4py
 
+    source $SIMPATH_INSTALL/bin/thisroot.sh
+
     cmake ../environments/g4py \
           -DXERCESC_ROOT_DIR=${SIMPATH_INSTALL}  \
           -DBOOST_ROOT=${SIMPATH_INSTALL} \
