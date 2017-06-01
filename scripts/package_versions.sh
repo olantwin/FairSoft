@@ -13,8 +13,8 @@ export GSLVERSION=gsl-1.16
 export ICU_LOCATION="http://download.icu-project.org/files/icu4c/53.1/"
 export ICUVERSION=icu4c-53_1
 
-export BOOST_LOCATION="http://sourceforge.net/projects/boost/files/boost/1.59.0/"
-export BOOSTVERSION=boost_1_59_0
+export BOOST_LOCATION="http://sourceforge.net/projects/boost/files/boost/1.62.0/"
+export BOOSTVERSION=boost_1_62_0
 
 export PYTHIA6_LOCATION="http://www.hepforge.org/archive/pythia6"
 export PYTHIA6VERSION=pythia-6.4.28
