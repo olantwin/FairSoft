@@ -31,7 +31,8 @@ then
   # needed to link with correct gfortran run-time
   mypatch ../pythia8_Darwin.patch | tee -a $logfile
 
-  USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared  --with-hepmc3-lib=$HEPINSTALLDIR/lib --with-hepmc3-include=$HEPINSTALLDIR/include  --with-hepmc3-version=$HEPMCVERSION  --with-lhapdf5-lib=$HEPINSTALLDIR/lib --with-lhapdf5-include=$HEPINSTALLDIR/include --with-lhapdf5-version=$LHAPDF_VERSION
+#  USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared  --with-hepmc3-lib=$HEPINSTALLDIR/lib --with-hepmc3-include=$HEPINSTALLDIR/include  --with-hepmc3-version=$HEPMCVERSION  --with-lhapdf5-lib=$HEPINSTALLDIR/lib --with-lhapdf5-include=$HEPINSTALLDIR/include --with-lhapdf5-version=$LHAPDF_VERSION
+  USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared  --with-hepmc2=$HEPINSTALLDIR --with-lhapdf5-lib=$HEPINSTALLDIR/lib --with-lhapdf5-include=$HEPINSTALLDIR/include --with-lhapdf5-version=$LHAPDF_VERSION
 
   if [ "$compiler" = "PGI" ];
   then
@@ -76,21 +77,19 @@ then
   then
     cp lib/libpythia8.dylib $install_prefix/lib
     #cp lib/liblhapdfdummy.dylib $install_prefix/lib
-    cp lib/libpythia8lhapdf5.so $install_prefix/lib
-    cp lib/libpythia8tohepmc.so $install_prefix/lib
+    cp lib/libpythia8*.so $install_prefix/lib
     cd $install_prefix/lib
     for file in $(ls libpythia8*.dylib); do
       install_name_tool -id $install_prefix/lib/$file $file
     done
-    for file in $(ls libpythia8lhapdf*.so); do
+    for file in $(ls libpythia8*.so); do
       install_name_tool -id $install_prefix/lib/$file $file
     done
     create_links dylib so
   else
     cp lib/libpythia8.so $install_prefix/lib
     #cp lib/liblhapdfdummy.so $install_prefix/lib
-    cp lib/libpythia8lhapdf5.so $install_prefix/lib
-    cp lib/libpythia8tohepmc.so $install_prefix/lib
+    cp -f lib/libpythia8*.so $install_prefix/lib
   fi
 
   check_all_libraries $install_prefix/lib
