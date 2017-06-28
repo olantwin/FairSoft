@@ -16,12 +16,10 @@
 +   fPythia8->Pythia8()->init();
  }
  
- ////////////////////////////////////////////////////////////////////////////////
+
 @@ -59,6 +60,7 @@
     fPythia8->Pythia8()->particleData.mayDecay(idPart,kTRUE);
     fPythia8->Pythia8()->moreDecays();
     if (fDebug > 0) fPythia8->EventListing();
 +   fPythia8->Pythia8()->particleData.mayDecay(idPart,kFALSE);
  }
- 
- ////////////////////////////////////////////////////////////////////////////////
