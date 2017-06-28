@@ -8,12 +8,9 @@
 if [ ! -d  $SIMPATH/transport/geant4 ];
 then
   cd $SIMPATH/transport
-  if [ ! -e $GEANT4VERSION.tar.gz ];
-  then
-    echo "*** Downloading geant4 sources ***"
-    download_file $GEANT4_LOCATION/$GEANT4VERSION.tar.gz
-  fi
-  untar geant4 $GEANT4VERSION.tar.gz
+  git clone $GEANT4_LOCATION
+  cd $SIMPATH/transport/geant4
+  git checkout -b $GEANT4VERSIONp
   if [ -d $GEANT4VERSION ];
   then
     ln -s $GEANT4VERSION geant4
@@ -33,6 +30,10 @@ if (not_there Geant4-lib $checkfile);
 then
 
   cd $SIMPATH/transport/geant4/
+
+  if [ -f ../geant4_G4DecayTable.patch ]; then
+    mypatch ../geant4_G4DecayTable.patch | tee -a $logfile
+  fi
 
   if [ -f ../${GEANT4VERSION}_c++11.patch ]; then
     mypatch ../${GEANT4VERSION}_c++11.patch | tee -a $logfile

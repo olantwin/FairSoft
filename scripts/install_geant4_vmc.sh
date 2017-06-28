@@ -20,6 +20,9 @@ then
   # patch allowing neutrinos from external decayer to be copied to stack
   mypatch ../geant4vmc_neutrino.patch
 
+  # bypass an error in the current development version of geant4vmc
+  mypatch ../geant4vmc_temp.patch
+
   # patch needed when using gcc5
   if [ "$compiler" = "gcc" -a "$build_root6" = "no" ]; then
     gcc_major_version=$(gcc -dumpversion | cut -c 1)
