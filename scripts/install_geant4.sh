@@ -4,17 +4,16 @@
 # If not download it a from the geant4 web server and
 # unpack it
 
-
 if [ ! -d  $SIMPATH/transport/geant4 ];
 then
   cd $SIMPATH/transport
-  git clone $GEANT4_LOCATION
-  cd $SIMPATH/transport/geant4
-  git checkout -b $GEANT4VERSIONp
+  git clone $GEANT4_LOCATION $GEANT4VERSION
   if [ -d $GEANT4VERSION ];
   then
     ln -s $GEANT4VERSION geant4
   fi
+  cd $SIMPATH/transport/geant4
+  git checkout -b $GEANT4VERSION
 fi
 
 # Full output during compilation and linking to check for the
