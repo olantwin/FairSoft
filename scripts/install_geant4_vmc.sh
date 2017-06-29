@@ -6,7 +6,7 @@ if [ ! -d  $SIMPATH/transport/geant4_vmc ]; then
   git clone $GEANT4VMC_LOCATION
 
   cd $SIMPATH/transport/geant4_vmc
-  git checkout -b $GEANT4VMCBRANCH $GEANT4VMCBRANCH
+  git checkout -b $GEANT4VMCBRANCH 
 fi
 
 install_prefix=$SIMPATH_INSTALL
@@ -21,7 +21,7 @@ then
   mypatch ../geant4vmc_neutrino.patch
 
   # bypass an error in the current development version of geant4vmc
-  mypatch ../geant4vmc_temp.patch
+  mypatch ../geant4_vmc_temp.patch
 
   # patch needed when using gcc5
   if [ "$compiler" = "gcc" -a "$build_root6" = "no" ]; then
