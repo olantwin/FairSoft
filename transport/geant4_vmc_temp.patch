@@ -1,7 +1,5 @@
-diff --git a/source/event/include/TG4SteppingAction.h b/source/event/include/TG4SteppingAction.h
-index 55c44b8..95cf64a 100755
---- a/source/event/include/TG4SteppingAction.h
-+++ b/source/event/include/TG4SteppingAction.h
+--- /source/event/include/TG4SteppingAction.h
++++ /source/event/include/TG4SteppingAction.h
 @@ -158,7 +158,8 @@ inline void TG4SteppingAction::SetLoopVerboseLevel(G4int level) {
  
  inline void TG4SteppingAction::SetMaxNofSteps(G4int number) { 
