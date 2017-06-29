@@ -23,7 +23,7 @@ export HEPMC_LOCATION="http://lcgapp.cern.ch/project/simu/HepMC/download/"
 export HEPMCVERSION=2.06.09
 
 export PYTHIA8_LOCATION="http://home.thep.lu.se/~torbjorn/pythia8/"
-export PYTHIA8VERSION=pythia8212
+export PYTHIA8VERSION=pythia8226
 
 # Old versions available at: https://archive.apache.org/dist/xerces/c/3/sources/
 export XERCESC_LOCATION="http://mirror.serversupportforum.de/apache/xerces/c/3/sources/"

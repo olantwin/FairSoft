@@ -28,8 +28,10 @@ then
 
   cd $SIMPATH/generators/pythia8
 
-  # needed to link with correct gfortran run-time
-  mypatch ../pythia8_Darwin.patch | tee -a $logfile
+if [ "$platform" = "macosx" ]; then
+   # needed to link with correct gfortran run-time
+   mypatch ../pythia8_Darwin.patch | tee -a $logfile
+fi
 
 #  USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared  --with-hepmc3-lib=$HEPINSTALLDIR/lib --with-hepmc3-include=$HEPINSTALLDIR/include  --with-hepmc3-version=$HEPMCVERSION  --with-lhapdf5-lib=$HEPINSTALLDIR/lib --with-lhapdf5-include=$HEPINSTALLDIR/include --with-lhapdf5-version=$LHAPDF_VERSION
   USRLDFLAGSSHARED="$CXXFLAGS" ./configure  --enable-shared  --with-hepmc2=$HEPINSTALLDIR --with-lhapdf5-lib=$HEPINSTALLDIR/lib --with-lhapdf5-include=$HEPINSTALLDIR/include --with-lhapdf5-version=$LHAPDF_VERSION
