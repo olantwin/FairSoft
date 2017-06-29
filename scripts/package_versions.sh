@@ -33,7 +33,7 @@ export MESA_LOCATION="ftp://ftp.freedesktop.org/pub/mesa/older-versions/7.x/7.10
 export MESAVERSION=MesaLib-7.10.3
 
 export GEANT4_LOCATION="https://github.com/Geant4/geant4"
-export GEANT4VERSIONp=Geant4.10.3.1
+export GEANT4VERSIONp=Geant4-10.3.1
 export GEANT4VERSION=geant4-10.3-release
 
 
