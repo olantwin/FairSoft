@@ -1,7 +1,5 @@
-diff --git a/environments/g4py/source/particles/CMakeLists.txt b/environments/g4py/source/particles/CMakeLists.txt
-index 9221968..b9d5ea7 100644
---- a/environments/g4py/source/particles/CMakeLists.txt
-+++ b/environments/g4py/source/particles/CMakeLists.txt
+--- environments/g4py/source/particles/CMakeLists.txt
++++ environments/g4py/source/particles/CMakeLists.txt
 @@ -11,6 +11,7 @@ add_library(
    pyG4ParticleTable.cc
    pyG4PrimaryParticle.cc
@@ -10,10 +8,8 @@ index 9221968..b9d5ea7 100644
    pymodG4particles.cc
  )
  
-diff --git a/environments/g4py/source/particles/pyG4DecayTable.cc b/environments/g4py/source/particles/pyG4DecayTable.cc
-index df9ffc3..4d9c45a 100644
---- a/environments/g4py/source/particles/pyG4DecayTable.cc
-+++ b/environments/g4py/source/particles/pyG4DecayTable.cc
+--- environments/g4py/source/particles/pyG4DecayTable.cc
++++ environments/g4py/source/particles/pyG4DecayTable.cc
 @@ -31,10 +31,23 @@
  // ====================================================================
  #include <boost/python.hpp>
@@ -48,10 +44,8 @@ index df9ffc3..4d9c45a 100644
       ;
  
       // reduced functionality...
-diff --git a/environments/g4py/source/particles/pyG4PhaseSpaceDecayChannel.cc b/environments/g4py/source/particles/pyG4PhaseSpaceDecayChannel.cc
-index e69de29..c01f6f6 100644
---- a/environments/g4py/source/particles/pyG4PhaseSpaceDecayChannel.cc
-+++ b/environments/g4py/source/particles/pyG4PhaseSpaceDecayChannel.cc
+--- environments/g4py/source/particles/pyG4PhaseSpaceDecayChannel.cc
++++ environments/g4py/source/particles/pyG4PhaseSpaceDecayChannel.cc
 @@ -0,0 +1,52 @@
 +//
 +// ********************************************************************
@@ -105,10 +99,9 @@ index e69de29..c01f6f6 100644
 +
 +}
 +
-diff --git a/environments/g4py/source/particles/pymodG4particles.cc b/environments/g4py/source/particles/pymodG4particles.cc
-index b1852ee..ad3dec7 100644
---- a/environments/g4py/source/particles/pymodG4particles.cc
-+++ b/environments/g4py/source/particles/pymodG4particles.cc
+
+--- environments/g4py/source/particles/pymodG4particles.cc
++++ environments/g4py/source/particles/pymodG4particles.cc
 @@ -43,7 +43,7 @@ void export_G4DecayTable();
  void export_G4PrimaryParticle();
  void export_G4PrimaryVertex();
@@ -125,10 +118,8 @@ index b1852ee..ad3dec7 100644
 +  export_G4PhaseSpaceDecayChannel();
  }
  
-diff --git a/source/particles/management/include/G4DecayTable.hh b/source/particles/management/include/G4DecayTable.hh
-index 10483ae..701094a 100644
---- a/source/particles/management/include/G4DecayTable.hh
-+++ b/source/particles/management/include/G4DecayTable.hh
+--- source/particles/management/include/G4DecayTable.hh
++++ source/particles/management/include/G4DecayTable.hh
 @@ -46,6 +46,7 @@
  #include "globals.hh"
  #include "G4ParticleDefinition.hh"
