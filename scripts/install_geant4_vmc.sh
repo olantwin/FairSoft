@@ -64,7 +64,9 @@ then
 
   cd $SIMPATH_INSTALL
   mkdir -p share/geant4_vmc
-  ln -s $SIMPATH_INSTALL/share/Geant4VMC-3.2.0/examples/macro $SIMPATH_INSTALL/share/geant4_vmc/macro
+  vmcDir=$(find share -name 'Geant4VMC*')
+  echo "DEBUG $vmcDir"   
+  ln -s $SIMPATH_INSTALL/$vmcDir/examples/macro $SIMPATH_INSTALL/share/geant4_vmc/macro
 fi
 
 if [ "$platform" = "macosx" ];
