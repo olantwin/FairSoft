@@ -135,4 +135,102 @@
 +    void  Insert( G4PhaseSpaceDecayChannel* aChannel){Insert(dynamic_cast<G4VDecayChannel*>(aChannel));};
      // Insert a decay channel at proper position 
      // (i.e. sorted by using branching ratio ) 
+
+--- environments/g4py/source/processes/pymodG4processes.cc
++++ environments/g4py/source/processes/pymodG4processes.cc
+@@ -45,7 +45,8 @@ void export_G4EmCalculator();
+ void export_G4ProductionCutsTable();
+ void export_G4VCrossSectionHandler();
+ void export_G4CrossSectionHandler();
+-
++void export_G4GammaConversionToMuons();
++void export_G4AnnihiToMuPair();
+ BOOST_PYTHON_MODULE(G4processes)
+ {
+   export_G4ProcessManager();
+@@ -57,4 +58,6 @@ BOOST_PYTHON_MODULE(G4processes)
+   export_G4ProductionCutsTable();
+   export_G4VCrossSectionHandler();
+   export_G4CrossSectionHandler();
++  export_G4GammaConversionToMuons();
++  export_G4AnnihiToMuPair();
+ }
+
+--- environments/g4py/source/processes/pyG4VProcess.cc
++++ environments/g4py/source/processes/pyG4VProcess.cc
+@@ -31,7 +31,8 @@
+ // ====================================================================
+ #include <boost/python.hpp>
+ #include "G4VProcess.hh"
+-
++#include "G4GammaConversionToMuons.hh"
++#include "G4AnnihiToMuPair.hh"
+ using namespace boost::python;
  
+ // ====================================================================
+@@ -72,3 +73,25 @@ void export_G4VProcess()
+     .def("GetVerboseLevel",      &G4VProcess::GetVerboseLevel)
+     ;
+ }
++void export_G4GammaConversionToMuons()
++{
++  class_<G4GammaConversionToMuons, G4GammaConversionToMuons*, boost::noncopyable>
++    ("G4GammaConversionToMuons", "special process", no_init)
++    // ---
++    // Note that only limited methods are exposed.
++    .def("SetCrossSecFactor",         &G4GammaConversionToMuons::SetCrossSecFactor)
++    .def("GetProcessName",       &G4VProcess::GetProcessName,
++         return_value_policy<return_by_value>())
++    ;
++}
++void export_G4AnnihiToMuPair()
++{
++  class_<G4AnnihiToMuPair, G4AnnihiToMuPair*, boost::noncopyable>
++    ("G4AnnihiToMuPair", "special process", no_init)
++    // ---
++    // Note that only limited methods are exposed.
++    .def("SetCrossSecFactor",         &G4AnnihiToMuPair::SetCrossSecFactor)
++    .def("GetProcessName",       &G4VProcess::GetProcessName,
++         return_value_policy<return_by_value>())
++    ;
++}
+
+--- environments/g4py/source/processes/pyG4ProcessTable.cc
++++ environments/g4py/source/processes/pyG4ProcessTable.cc
+@@ -32,6 +32,8 @@
+ #include <boost/python.hpp>
+ class G4UImessenger;
+ #include "G4ProcessTable.hh"
++#include "G4AnnihiToMuPair.hh"
++#include "G4GammaConversionToMuons.hh"
+ 
+ using namespace boost::python;
+ 
+@@ -52,6 +54,15 @@ G4VProcess*(G4ProcessTable::*f3_FindProcess)
+   (const G4String&, const G4ProcessManager*) const
+   = &G4ProcessTable::FindProcess;
+ 
++G4AnnihiToMuPair* f4_FindProcess(G4ProcessTable* procTable, const G4String proc, const G4String part)
++{
++  return dynamic_cast<G4AnnihiToMuPair*>(procTable-> FindProcess(proc,part));
++}
++G4GammaConversionToMuons* f5_FindProcess(G4ProcessTable* procTable, const G4String proc, const G4String part)
++{
++  return dynamic_cast<G4GammaConversionToMuons*>(procTable-> FindProcess(proc,part));
++}
++
+ // FindProcesses
+ // raw vector pointer -> Python list conversion
+ list f1_FindProcesses(G4ProcessTable* procTable)
+@@ -159,7 +170,9 @@ void export_G4ProcessTable()
+          return_value_policy<reference_existing_object>())
+     .def("FindProcess",          f3_FindProcess,
+          return_value_policy<reference_existing_object>())
+-    .def("FindProcess",          f3_FindProcess,
++    .def("FindProcessA",          f4_FindProcess,
++         return_value_policy<reference_existing_object>())
++    .def("FindProcess",          f5_FindProcess,
+          return_value_policy<reference_existing_object>())
+     // ---
+     .def("FindProcesses",        f1_FindProcesses)
+
