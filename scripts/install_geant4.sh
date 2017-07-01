@@ -13,7 +13,8 @@ then
     ln -s $GEANT4VERSION geant4
   fi
   cd $SIMPATH/transport/geant4
-  git checkout -b $GEANT4VERSION
+  version=${GEANT4VERSIONp/Geant4-/v}
+  git checkout tags/$version -b $GEANT4VERSION
 fi
 
 # Full output during compilation and linking to check for the
