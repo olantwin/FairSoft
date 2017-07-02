@@ -6,7 +6,7 @@ if [ ! -d  $SIMPATH/transport/geant4_vmc ]; then
   git clone $GEANT4VMC_LOCATION
 
   cd $SIMPATH/transport/geant4_vmc
-  git checkout -b $GEANT4VMCBRANCH 
+  git checkout tags/$GEANT4VMCVERSION -b $GEANT4VERSION 
 fi
 
 install_prefix=$SIMPATH_INSTALL
