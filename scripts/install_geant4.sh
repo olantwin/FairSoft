@@ -108,42 +108,52 @@ then
   if [ "$geant4_download_install_data_automatic" = "yes" ];
   then
     # create unique links which is independent of the Geant4 version
-    if [ ! -L $install_prefix/share/Geant4 ]; then
-      ln -s $install_prefix/share/$GEANT4VERSIONp $install_prefix/share/Geant4
+    if [ -L $install_prefix/share/Geant4 ]; then
+      rm  $install_prefix/share/Geant4 
     fi
+    ln -s $install_prefix/share/$GEANT4VERSIONp $install_prefix/share/Geant4
     # create unique links for the data directories which are
     # independent of the actual data versions
-    if [ ! -L $install_prefix/share/Geant4/data/G4ABLA ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4ABLA_VERSION} $install_prefix/share/Geant4/data/G4ABLA
+    if [ -L $install_prefix/share/Geant4/data/G4ABLA ]; then
+       rm $install_prefix/share/Geant4/data/G4ABLA
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/G4EMLOW ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4EMLOW_VERSION} $install_prefix/share/Geant4/data/G4EMLOW
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4ABLA*') $install_prefix/share/Geant4/data/G4ABLA 
+    if [ -L $install_prefix/share/Geant4/data/G4EMLOW ]; then
+       rm $install_prefix/share/Geant4/data/G4EMLOW
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/G4ENSDFSTATE ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4ENSDFSTATE_VERSION} $install_prefix/share/Geant4/data/G4ENSDFSTATE
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4EMLOW*') $install_prefix/share/Geant4/data/G4EMLOW 
+    if [ -L $install_prefix/share/Geant4/data/G4ENSDFSTATE ]; then
+      rm $install_prefix/share/Geant4/data/G4ENSDFSTATE
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/G4NDL ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4NDL_VERSION} $install_prefix/share/Geant4/data/G4NDL
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4ENSDFSTATE*') $install_prefix/share/Geant4/data/G4ENSDFSTATE    
+    if [ -L $install_prefix/share/Geant4/data/G4NDL ]; then
+     rm $install_prefix/share/Geant4/data/G4NDL
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/G4NEUTRONXS ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4NEUTRONXS_VERSION} $install_prefix/share/Geant4/data/G4NEUTRONXS
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4NDL*') $install_prefix/share/Geant4/data/G4NDL    
+    if [ -L $install_prefix/share/Geant4/data/G4NEUTRONXS ]; then
+     rm $install_prefix/share/Geant4/data/G4NEUTRONXS
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/G4PII ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4PII_VERSION} $install_prefix/share/Geant4/data/G4PII
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4NEUTRONXS*') $install_prefix/share/Geant4/data/G4NEUTRONXS   
+    if [ -L $install_prefix/share/Geant4/data/G4PII ]; then
+      rm $install_prefix/share/Geant4/data/G4PII
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/G4SAIDDATA ]; then
-      ln -s $install_prefix/share/Geant4/data/${G4SAIDDATA_VERSION} $install_prefix/share/Geant4/data/G4SAIDDATA
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4PII*') $install_prefix/share/Geant4/data/G4PII  
+    if [ -L $install_prefix/share/Geant4/data/G4SAIDDATA ]; then
+     rm $install_prefix/share/Geant4/data/G4SAIDDATA
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/PhotonEvaporation ]; then
-      ln -s $install_prefix/share/Geant4/data/${PhotonEvaporation_VERSION} $install_prefix/share/Geant4/data/PhotonEvaporation
+    ln -s $(find $install_prefix/share/Geant4/data -name 'G4SAIDDATA*') $install_prefix/share/Geant4/data/G4SAIDDATA    
+    if [ -L $install_prefix/share/Geant4/data/PhotonEvaporation ]; then
+     rm $install_prefix/share/Geant4/data/PhotonEvaporation
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/RadioactiveDecay ]; then
-      ln -s $install_prefix/share/Geant4/data/${RadioactiveDecay_VERSION} $install_prefix/share/Geant4/data/RadioactiveDecay
+    ln -s $(find $install_prefix/share/Geant4/data -name 'PhotonEvaporation*') $install_prefix/share/Geant4/data/PhotonEvaporation   
+    if [ -L $install_prefix/share/Geant4/data/RadioactiveDecay ]; then
+      rm $install_prefix/share/Geant4/data/RadioactiveDecay
     fi
-    if [ ! -L $install_prefix/share/Geant4/data/RealSurface ]; then
-      ln -s $install_prefix/share/Geant4/data/${RealSurface_VERSION} $install_prefix/share/Geant4/data/RealSurface
+    ln -s $(find $install_prefix/share/Geant4/data -name 'RadioactiveDecay*') $install_prefix/share/Geant4/data/RadioactiveDecay   
+    if [ -L $install_prefix/share/Geant4/data/RealSurface ]; then
+     rm $install_prefix/share/Geant4/data/RealSurface
     fi
-
+    ln -s $(find $install_prefix/share/Geant4/data -name 'RealSurface*') $install_prefix/share/Geant4/data/RealSurface
   fi
 
   . $install_prefix/share/$GEANT4VERSIONp/geant4make/geant4make.sh
