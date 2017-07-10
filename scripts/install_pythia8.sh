@@ -54,9 +54,10 @@ fi
   else
    $MAKE_command -j$number_of_processes CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
   fi
-
+  
   mkdir -p $install_prefix/include
   cp -r include/Pythia8 $install_prefix/include
+  cp -r include/Pythia8Plugins $install_prefix/include/Pythia8
 
   mkdir -p $install_prefix/share/pythia8
   if [ -d share/xmldoc ];
