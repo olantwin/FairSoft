@@ -1,0 +1,35 @@
+--- include/Pythia8Plugins/EvtGen.h
++++ include/Pythia8Plugins/EvtGen.h
+@@ -90,7 +90,7 @@ public:
+ 
+   // Constructor.
+   EvtGenDecays(Pythia *pythiaPtrIn, string decayFile, string particleDataFile,
+-    EvtExternalGenList *extPtrIn = 0, EvtAbsRadCorr *fsrPtrIn = 0,
++    EvtGen *evtPtr = 0, EvtExternalGenList *extPtrIn = 0, EvtAbsRadCorr *fsrPtrIn = 0,
+     int mixing = 1, bool xml = false, bool limit = true,
+     bool extUse = true, bool fsrUse = true);
+ 
+@@ -220,9 +220,9 @@ protected:
+ //   fsrUse:           flag to use radiative correction engine with EvtGen.
+ 
+ EvtGenDecays::EvtGenDecays(Pythia *pythiaPtrIn, string decayFile,
+-  string particleDataFile, EvtExternalGenList *extPtrIn,
++  string particleDataFile,EvtGen *evtPtr, EvtExternalGenList *extPtrIn,
+   EvtAbsRadCorr *fsrPtrIn, int mixing, bool xml, bool limit,
+-  bool extUse, bool fsrUse) : extPtr(extPtrIn), fsrPtr(fsrPtrIn),
++  bool extUse, bool fsrUse) : extPtr(extPtrIn), fsrPtr(fsrPtrIn),evtgen(evtPtr),
+   signalSuffix("_SIGNAL"), pythiaPtr(pythiaPtrIn), rndm(&pythiaPtr->rndm),
+   updated(false) {
+ 
+@@ -237,9 +237,10 @@ EvtGenDecays::EvtGenDecays(Pythia *pythiaPtrIn, string decayFile,
+   if (fsrPtr) fsrOwner = false;
+   else {fsrOwner = true; fsrPtr = extPtr->getPhotosModel();}
+   models = extPtr->getListOfModels();
++  if (!evtgen){
+   evtgen = new EvtGen(decayFile.c_str(), particleDataFile.c_str(),
+     &rndm, fsrUse ? fsrPtr : 0, extUse ? &models : 0, mixing, xml);
+-
++  }
+   // Get the Pythia decay limits.
+   if (!pythiaPtr) return;
+   limitTau0     = pythiaPtr->settings.flag("ParticleDecays:limitTau0");

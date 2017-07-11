@@ -28,6 +28,9 @@ then
 
   cd $SIMPATH/generators/pythia8
 
+# needed to have multiple instances of Pythia8 but only one Evtgen
+mypatch ../pythia8_evtgen.patch | tee -a $logfile
+
 if [ "$platform" = "macosx" ]; then
    # needed to link with correct gfortran run-time
    mypatch ../pythia8_Darwin.patch | tee -a $logfile
