@@ -1,6 +1,6 @@
---- Makefile.org	2017-05-16 13:00:56.000000000 +0200
-+++ Makefile	2017-05-16 13:16:49.000000000 +0200
-@@ -30,6 +30,12 @@
+--- Makefile.orig	2017-04-26 14:08:43.000000000 +0200
++++ Makefile	2017-07-13 16:43:28.000000000 +0200
+@@ -33,6 +33,12 @@
  LOCAL_MKDIRS:=$(shell mkdir -p $(LOCAL_TMP) $(LOCAL_LIB))
  CXX_COMMON:=-I$(LOCAL_INCLUDE) $(CXX_COMMON)
 
@@ -13,12 +13,12 @@
  # PYTHIA.
  OBJECTS=$(patsubst $(LOCAL_SRC)/%.cc,$(LOCAL_TMP)/%.o,\
  	$(wildcard $(LOCAL_SRC)/*.cc))
-@@ -101,7 +107,7 @@
+@@ -113,7 +119,7 @@
  $(LOCAL_LIB)/libpythia8lhapdf5.so: $(LOCAL_TMP)/LHAPDF5Plugin.o\
  	$(LOCAL_LIB)/libpythia8.a
- 	$(CXX) $^ -o $@ $(CXX_COMMON) $(CXX_SHARED) $(CXX_SONAME),$(notdir $@)\
--	 -L$(LHAPDF5_LIB) -Wl,-rpath $(LHAPDF5_LIB) -lLHAPDF -lgfortran
-+	 -L$(LHAPDF5_LIB) -Wl,-rpath $(LHAPDF5_LIB) -lLHAPDF $(F77LIBDIR) -lgfortran
+ 	$(CXX) $^ -o $@ $(CXX_COMMON) $(CXX_SHARED) $(CXX_SONAME)$(notdir $@)\
+-	 -L$(LHAPDF5_LIB) -Wl,-rpath,$(LHAPDF5_LIB) -lLHAPDF -lgfortran
++	 -L$(LHAPDF5_LIB) -Wl,-rpath,$(LHAPDF5_LIB) -lLHAPDF $(F77LIBDIR) -lgfortran
  $(LOCAL_LIB)/libpythia8lhapdf6.so: $(LOCAL_TMP)/LHAPDF6Plugin.o\
  	$(LOCAL_LIB)/libpythia8.a
- 	$(CXX) $^ -o $@ $(CXX_COMMON) $(CXX_SHARED) $(CXX_SONAME),$(notdir $@)\
+ 	$(CXX) $^ -o $@ $(CXX_COMMON) $(CXX_SHARED) $(CXX_SONAME)$(notdir $@)\
