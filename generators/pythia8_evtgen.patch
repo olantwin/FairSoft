@@ -1,5 +1,5 @@
---- include/Pythia8Plugins/EvtGen.h.org	2017-07-12 16:53:08.506041353 +0200
-+++ include/Pythia8Plugins/EvtGen.h	2017-07-12 16:56:13.862036494 +0200
+--- include/Pythia8Plugins/EvtGen.h.orig	2017-04-26 14:08:46.000000000 +0200
++++ include/Pythia8Plugins/EvtGen.h	2017-07-13 17:04:40.000000000 +0200
 @@ -90,7 +90,7 @@
 
    // Constructor.
@@ -23,18 +23,19 @@
    signalSuffix("_SIGNAL"), pythiaPtr(pythiaPtrIn), rndm(&pythiaPtr->rndm),
    updated(false) {
 
-@@ -237,8 +237,10 @@
+@@ -237,9 +237,10 @@
    if (fsrPtr) fsrOwner = false;
    else {fsrOwner = true; fsrPtr = extPtr->getPhotosModel();}
    models = extPtr->getListOfModels();
 +  if (!evtgen){
    evtgen = new EvtGen(decayFile.c_str(), particleDataFile.c_str(),
      &rndm, fsrUse ? fsrPtr : 0, extUse ? &models : 0, mixing, xml);
+-
 +  }
    // Get the Pythia decay limits.
    if (!pythiaPtr) return;
    limitTau0     = pythiaPtr->settings.flag("ParticleDecays:limitTau0");
-@@ -278,7 +280,7 @@
+@@ -279,7 +280,7 @@
  // definitions, but rather just remove the unwanted decay channels
  // from the signal decay definition.
 
@@ -43,7 +44,7 @@
 
    // Reset the signal and signal counters.
    if (!pythiaPtr || !evtgen) return -1;
-@@ -381,7 +383,7 @@
+@@ -382,7 +383,7 @@
  // width, minimum mass, maximum mass, and nominal lifetime are
  // set. The name string is not set.
 
@@ -52,7 +53,7 @@
    if (!pythiaPtr || !evtgen) return;
    for (int entry = 0; entry < (int)EvtPDL::entries(); ++entry) {
      EvtId egId = EvtPDL::getEntry(entry);
-@@ -404,7 +406,7 @@
+@@ -405,7 +406,7 @@
  // symmetric. Particularly, it is not possible to update the spin
  // type, charge, or nominal lifetime in the EvtGen particle database.
 
@@ -61,7 +62,7 @@
    if (!pythiaPtr || !evtgen) return;
    int pyId = pythiaPtr->particleData.nextId(1);
    while (pyId != 0) {
-@@ -429,7 +431,7 @@
+@@ -430,7 +431,7 @@
  // decay the particle. Additionally, the signal decay channels are
  // turned off for the non-aliased signal particle.
 
@@ -70,7 +71,7 @@
 
    // Loop over the EvtGen entries.
    if (!pythiaPtr) return;
-@@ -520,7 +522,7 @@
+@@ -521,7 +522,7 @@
  // pySigs and egSigs vectors, to be decayed later. However, if any of
  // these arguments is NULL then the entire tree is written.
 
@@ -79,7 +80,7 @@
    vector<int> *pySigs, vector<EvtParticle*> *egSigs,
    vector<double> *bfs, double *wgt) {
 
-@@ -578,7 +580,7 @@
+@@ -579,7 +580,7 @@
 
  // Modified slightly from ParticleDecays::checkVertex.
 
@@ -88,7 +89,7 @@
    if (!limitDecay) return true;
    if (limitTau0 && pyPro->tau0() > tau0Max) return false;
    if (limitTau && pyPro->tau() > tauMax) return false;
-@@ -593,7 +595,7 @@
+@@ -594,7 +595,7 @@
 
  // Check if a particle is signal.
 
@@ -97,7 +98,7 @@
    signal = signals.find(pyPro->id());
    if (signal != signals.end() && (signal->second.status < 0 ||
      signal->second.status == pyPro->status())) return true;
-@@ -607,7 +609,7 @@
+@@ -608,7 +609,7 @@
  // The criteria defined here for oscillation is a single daughter but
  // with a different ID from the mother.
 
