@@ -33,8 +33,8 @@ generators/pluto_v5.37/
 generators/pythia6.tar.gz
 generators/pythia6/
 generators/pythia8
-generators/pythia8212.tgz
-generators/pythia8212/
+generators/pythia8226.tgz
+generators/pythia8226/
 generators/genie
 generators/genie-2.10.0/
 tools/root/
@@ -72,6 +72,7 @@ transport/geant4.10.01.p02/
 transport/geant4.10.01.tar.gz
 transport/geant4.10.01/
 transport/geant4.10.01.p02
+transport/geant4-10.3-release/
 transport/geant4_vmc/
 transport/vgm/
 basics/xerces-c-3.1.4.tar.gz
